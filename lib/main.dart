@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 
+late Box dataBox;
+
 void main() async{
   await Hive.initFlutter();
-  var box = await Hive.openBox('testBox');
+  dataBox = await Hive.openBox('dataBox');
+  Hive.registerAdapter(UserModelAdapter());
   runApp(const MyApp());
 }
 

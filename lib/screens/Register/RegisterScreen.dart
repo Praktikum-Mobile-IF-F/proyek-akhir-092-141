@@ -25,30 +25,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
         children: [
           const topBanner(),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const logoImage(),
-                Container(
-                    margin: const EdgeInsets.only(top: 20, bottom: 30),
-                    child: const Text(
-                      "REGISTER",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    )),
-                _formContainer(),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.only(right: 30), // Align button properly
-                      child: registerButton(),
-                    ),
-                  ],
-                ),
-                const loginText(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const logoImage(),
+                  Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 30),
+                      child: const Text(
+                        "REGISTER",
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      )),
+                  _formContainer(),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsets.only(right: 30), // Align button properly
+                        child: registerButton(),
+                      ),
+                    ],
+                  ),
+                  const loginText(),
+                ],
+              ),
             ),
           ),
         ],
