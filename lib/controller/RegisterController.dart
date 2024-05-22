@@ -15,7 +15,7 @@ class RegisterController {
         dataBox.put(emailController.text, UserModel(username: userController.text, email: emailController.text, password: passController.text));
         UserModel user = dataBox.get(emailController.text);
         print(user.toString());
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(context, '/login');
         });
       }
@@ -25,7 +25,7 @@ class RegisterController {
         dataBox.put(emailController.text, UserModel(username: userController.text, email: emailController.text, password: passController.text));
         UserModel user = dataBox.get(emailController.text);
         print(user.toString());
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(context, '/login');
         });
       }

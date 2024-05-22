@@ -11,10 +11,10 @@ class _bottomInfoState extends State<bottomInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 50),
+      margin: const EdgeInsets.only(top: 50),
       child: Column(
         children: [
-          Text(
+          const Text(
             'SPECIAL ABILITIES',
             style: TextStyle(
               color: Colors.white,
@@ -22,7 +22,7 @@ class _bottomInfoState extends State<bottomInfo> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -32,7 +32,7 @@ class _bottomInfoState extends State<bottomInfo> {
               _abilityIcon(Icons.label, Colors.white),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           _abilityDesc('tes'),
         ],
       ),
@@ -40,7 +40,7 @@ class _bottomInfoState extends State<bottomInfo> {
   }
 
   Widget _abilityIcon(IconData icon, Color color) {
-    return Container(
+    return SizedBox(
       width: 75,
       height: 75,
       child: ElevatedButton(
@@ -61,7 +61,7 @@ class _bottomInfoState extends State<bottomInfo> {
     return Container(
       child: Column(
         children: [
-          Text(
+          const Text(
             'Q - CURVEBALL',
             style: TextStyle(
               color: Colors.white,
@@ -71,8 +71,8 @@ class _bottomInfoState extends State<bottomInfo> {
             textAlign: TextAlign.center,
           ),
           Container(
-            margin: EdgeInsets.only(top: 20),
-            child: Text(
+            margin: const EdgeInsets.only(top: 20),
+            child: const Text(
               'Equip a flare orb that takes a curving path and detonates shortly after throwing. '
               'FIRE to curve the flare orb to the left, detonating and blinding any player who sees the orb. '
               'ALTERNATE FIRE to curve the flare orb to the right.',

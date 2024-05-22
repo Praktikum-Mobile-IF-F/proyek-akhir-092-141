@@ -11,7 +11,7 @@ class topInfo extends StatelessWidget {
           'https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/fullportrait.png',
           height: 300.0,
         ),
-        Positioned(
+        const Positioned(
           top: 40.0,
           right: 5,
           child: Column(

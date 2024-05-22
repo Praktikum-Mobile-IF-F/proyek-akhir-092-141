@@ -5,7 +5,17 @@ class ApiDataSource {
 
   // Req Agent Data
   Future<Map<String, dynamic>> loadCharacters() {
-    return BaseNetwork.get("/v1/agents?isPlayableCharacter=true");
+    return BaseNetwork.get("v1/agents?isPlayableCharacter=true");
+  }
+
+  // Req Map Data
+  Future<Map<String, dynamic>> loadMap() {
+    return BaseNetwork.get("v1/maps");
+  }
+
+  // Req Weapons Data
+  Future<Map<String, dynamic>> loadWeapon() {
+    return BaseNetwork.get("v1/weapons");
   }
 
   // Req Character Detail

@@ -1,6 +1,6 @@
 class AgentModel {
   final int? status;
-  final List<Data>? data;
+  final List<AgentData>? data;
 
   AgentModel({
     this.status,
@@ -10,14 +10,14 @@ class AgentModel {
   AgentModel.fromJson(Map<String, dynamic> json)
       : status = json['status'] as int?,
         data = (json['data'] as List?)
-            ?.map((dynamic e) => Data.fromJson(e as Map<String, dynamic>))
+            ?.map((dynamic e) => AgentData.fromJson(e as Map<String, dynamic>))
             .toList();
 
   Map<String, dynamic> toJson() =>
       {'status': status, 'data': data?.map((e) => e.toJson()).toList()};
 }
 
-class Data {
+class AgentData {
   final String? uuid;
   final String? displayName;
   final String? description;
@@ -41,7 +41,7 @@ class Data {
   final List<Abilities>? abilities;
   final dynamic voiceLine;
 
-  Data({
+  AgentData({
     this.uuid,
     this.displayName,
     this.description,
@@ -66,7 +66,7 @@ class Data {
     this.voiceLine,
   });
 
-  Data.fromJson(Map<String, dynamic> json)
+  AgentData.fromJson(Map<String, dynamic> json)
       : uuid = json['uuid'] as String?,
         displayName = json['displayName'] as String?,
         description = json['description'] as String?,
