@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
+import 'package:project_prak_tpm/screens/AgentDetail/AgentDetailScreen.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/' : (context) => const SplashScreen(),
-        '/login': (context) => const LoginScreen(),
+        '/login': (context) => AgentDetailScreen(),
         '/register': (context) => const RegisterScreen(),
       },
     );
