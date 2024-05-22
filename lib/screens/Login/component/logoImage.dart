@@ -6,7 +6,7 @@ class logoImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 100),
+      padding: const EdgeInsets.only(bottom: 100),
       width: 120,
       child: Image.asset('assets/images/valorant_logo_2.png'),
     );

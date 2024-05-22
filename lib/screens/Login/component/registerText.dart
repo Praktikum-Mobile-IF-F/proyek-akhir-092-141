@@ -10,15 +10,15 @@ class registerText extends StatelessWidget {
     TextStyle linkStyle = TextStyle(color: Colors.blue[300]);
 
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       child: RichText(
           text: TextSpan(style: defaultStyle, children: <TextSpan>[
-        TextSpan(text: "cannot login? "),
+        const TextSpan(text: "cannot login? "),
         TextSpan(
             text: "sign up",
             style: linkStyle,
             recognizer: TapGestureRecognizer()..onTap = () {
-              Navigator.pushNamed(context, '/register');
+              Navigator.pushReplacementNamed(context, '/register');
             })
       ])),
     );

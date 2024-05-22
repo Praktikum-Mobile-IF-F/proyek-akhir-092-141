@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../../utils/color/colorPalette.dart';
+import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 
 class formField extends StatelessWidget {
   final TextEditingController controller;
   final bool isPass;
+  final bool isEmail;
   final String hint;
   final Icon icon;
 
@@ -13,7 +13,8 @@ class formField extends StatelessWidget {
       required this.controller,
       required this.hint,
       required this.icon,
-      this.isPass = false});
+      this.isPass = false,
+      this.isEmail = false});
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +38,18 @@ class formField extends StatelessWidget {
           ),
         ),
         validator: (value) {
-          if (value == null || value.length == 0) {
+          if (value == null || value.isEmpty) {
             return "Fill This Field";
           }
-          if (value != null && !value.contains('@') && !isPass) {
+          if (!value.contains('@') && isEmail) {
             return "Please use correct email address using @";
           }
-          if (value != null && value.length < 8 && isPass) {
+          if (value.length < 8 && isPass) {
             return 'Minimum Password Lenght is 8';
           }
           return null;
         },
       ),
     );
-    ;
   }
 }

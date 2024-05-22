@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
@@ -45,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         child: Center(
           child: FadeTransition(
             opacity: _animation,
-            child: Container(
+            child: SizedBox(
               width: 300,
                     child: Image.asset('assets/images/valorant_logo.png')
                 ),

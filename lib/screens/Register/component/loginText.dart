@@ -10,10 +10,10 @@ class loginText extends StatelessWidget {
     TextStyle linkStyle = TextStyle(color: Colors.blue[300]);
 
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       child: RichText(
           text: TextSpan(style: defaultStyle, children: <TextSpan>[
-        TextSpan(text: "already have account? "),
+        const TextSpan(text: "already have account? "),
         TextSpan(
             text: "sign in",
             style: linkStyle,

@@ -37,19 +37,18 @@ class formField extends StatelessWidget {
           ),
         ),
         validator: (value) {
-          if (value == null || value.length == 0) {
+          if (value == null || value.isEmpty) {
             return "Fill This Field";
           }
-          if (value != null && !value.contains('@') && !isPass) {
+          if (!value.contains('@') && !isPass) {
             return "Please use correct email address using @";
           }
-          if (value != null && value.length < 8 && isPass) {
+          if (value.length < 8 && isPass) {
             return 'Minimum Password Lenght is 8';
           }
           return null;
         },
       ),
     );
-    ;
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/screens/Login/component/formField.dart';
+import 'package:project_prak_tpm/screens/Login/component/formContainer.dart';
 import 'package:project_prak_tpm/screens/Login/component/loginButton.dart';
 import 'package:project_prak_tpm/screens/Login/component/logoImage.dart';
 import 'package:project_prak_tpm/screens/Login/component/registerText.dart';
 
-TextEditingController userController = TextEditingController();
+TextEditingController emailController = TextEditingController();
 TextEditingController passController = TextEditingController();
+final loginFormKey = GlobalKey<FormState>();
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -15,16 +16,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const logoImage(),
-              _formContainer(),
+              logoImage(),
+              formContainer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -36,15 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _formContainer(){
-    return Column(
-      children: [
-        formField(controller: userController, hint: "USERNAME", icon: const Icon(Icons.person)),
-        formField(controller: passController, hint: "PASSWORD", icon: const Icon(Icons.lock), isPass: true,),
-      ],
     );
   }
 }

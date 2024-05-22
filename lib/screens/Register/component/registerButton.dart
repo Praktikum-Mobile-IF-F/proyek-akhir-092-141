@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/controller/LoginController.dart';
-import 'package:project_prak_tpm/controller/registerController.dart';
+import 'package:project_prak_tpm/controller/RegisterController.dart';
+import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 
 import '../../../utils/color/colorPalette.dart';
 
-class registerButton extends StatelessWidget {
+class registerButton extends StatefulWidget {
   const registerButton({super.key});
 
+  @override
+  State<registerButton> createState() => _registerButtonState();
+}
+
+class _registerButtonState extends State<registerButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       width: 80,
-      padding: EdgeInsets.only(top: 30, right: 30),
+      padding: const EdgeInsets.only(top: 30, right: 30),
       child: IconButton(
-        onPressed: () => RegisterController.RegisterLogic(context),
+        onPressed: () => RegisterController.registerLogic(context, registerFormKey),
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorPallete.secondaryColor,
           foregroundColor: ColorPallete.thirdColor,
@@ -22,7 +27,7 @@ class registerButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        icon: Icon(Icons.chevron_right),
+        icon: const Icon(Icons.chevron_right),
       ),
     );
   }

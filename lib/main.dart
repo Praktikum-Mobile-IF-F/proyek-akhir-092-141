@@ -10,8 +10,8 @@ late Box dataBox;
 
 void main() async{
   await Hive.initFlutter();
-  dataBox = await Hive.openBox('dataBox');
   Hive.registerAdapter(UserModelAdapter());
+  dataBox = await Hive.openBox('dataBox');
   runApp(const MyApp());
 }
 

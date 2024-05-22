@@ -5,7 +5,7 @@ class logoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 120,
       child: Image.asset('assets/images/valorant_logo_2.png'),
     );
