@@ -10,6 +10,7 @@ import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 late Box dataBox;
 
 void main() async{
+  // Hive init
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
   dataBox = await Hive.openBox('dataBox');

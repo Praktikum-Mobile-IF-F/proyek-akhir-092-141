@@ -17,17 +17,17 @@ class _formContainerState extends State<formContainer> {
         child: Column(
           children: [
             formField(
-                controller: userController,
+                controller: userControllerR,
                 hint: "Username",
                 icon: const Icon(Icons.person)),
             formField(
-              controller: emailController,
+              controller: emailControllerR,
               hint: "Email",
               icon: const Icon(Icons.mail),
               isEmail: true,
             ),
             formField(
-              controller: passController,
+              controller: passControllerR,
               hint: "Password",
               icon: const Icon(Icons.lock),
               isPass: true,

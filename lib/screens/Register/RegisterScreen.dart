@@ -5,9 +5,9 @@ import 'package:project_prak_tpm/screens/Register/component/logoImage.dart';
 import 'package:project_prak_tpm/screens/Register/component/registerButton.dart';
 import 'package:project_prak_tpm/screens/Register/component/topBanner.dart';
 
-TextEditingController userController = TextEditingController();
-TextEditingController emailController = TextEditingController();
-TextEditingController passController = TextEditingController();
+TextEditingController userControllerR = TextEditingController();
+TextEditingController emailControllerR = TextEditingController();
+TextEditingController passControllerR = TextEditingController();
 final registerFormKey = GlobalKey<FormState>();
 
 class RegisterScreen extends StatefulWidget {

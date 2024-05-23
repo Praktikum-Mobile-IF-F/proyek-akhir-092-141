@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
+import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
 import 'package:project_prak_tpm/screens/AgentDetail/AgentDetailScreen.dart';
 
@@ -13,6 +15,7 @@ class AgentCard extends StatefulWidget {
 
 class _AgentCardState extends State<AgentCard> {
   bool isFavorite = false;
+  FavoriteController favoriteController = FavoriteController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +62,13 @@ class _AgentCardState extends State<AgentCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isFavorite = !isFavorite;
+                    favoriteController.setFavorite(widget.agentData.uuid!);
                   });
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    favoriteController.checkFavorite(widget.agentData.uuid!) ? Icons.favorite : Icons.favorite_border,
                     color: Colors.red,
                   ),
                 ),

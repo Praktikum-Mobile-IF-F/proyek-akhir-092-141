@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/LoginController.dart';
 import 'package:project_prak_tpm/screens/Login/component/formContainer.dart';
@@ -7,6 +5,7 @@ import 'package:project_prak_tpm/screens/Login/component/loginButton.dart';
 import 'package:project_prak_tpm/screens/Login/component/logoImage.dart';
 import 'package:project_prak_tpm/screens/Login/component/registerText.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../controller/SharedPreferenceController.dart';
 
 TextEditingController emailController = TextEditingController();
 TextEditingController passController = TextEditingController();
@@ -24,16 +23,17 @@ class _LoginScreenState extends State<LoginScreen> {
   late SharedPreferences loginData;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     checkLogin();
   }
 
-  void checkLogin() async{  
+  void checkLogin() async {
     loginData = await SharedPreferences.getInstance();
 
-    if(loginData.getBool('login') ?? false){
-    Navigator.pushReplacementNamed(context, '/home');
+    if (loginData.getBool('login') ?? false) {
+      await SharedPreferenceController.init();
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
