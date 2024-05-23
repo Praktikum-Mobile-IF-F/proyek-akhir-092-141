@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/HomeFavorite.dart';
 import 'package:project_prak_tpm/screens/Home/tab/HomeTab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: <Widget>[
         const HomeTab(),
+        const HomeFavorite(),
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [

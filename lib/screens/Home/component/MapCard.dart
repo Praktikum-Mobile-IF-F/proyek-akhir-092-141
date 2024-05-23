@@ -57,13 +57,13 @@ class _MapCardState extends State<MapCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    favoriteController.setFavorite(widget.mapData.uuid!);
+                    favoriteController.setFavorite('map', widget.mapData.uuid!);
                   });
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
-                    favoriteController.checkFavorite(widget.mapData.uuid!) ? Icons.favorite : Icons.favorite_border,
+                    favoriteController.checkFavorite('map', widget.mapData.uuid!) ? Icons.favorite : Icons.favorite_border,
                     color: Colors.red,
                   ),
                 ),

@@ -9,25 +9,32 @@ class FavoriteController {
     checkNull();
   }
 
-  bool checkFavorite(String uuid) {
-    if (favorite.contains(uuid) && favorite != null) {
+  bool checkFavorite(String type, String uuid) {
+    if (favorite.contains('$type-$uuid') && favorite != null) {
       return true;
     }
     return false;
   }
 
-  void setFavorite(String uuid) {
+  void setFavorite(String type, String uuid) {
     String status;
 
-    if (favorite.contains(uuid)) {
-      favorite.remove(uuid);
+    if (favorite.contains('$type-$uuid')) {
+      favorite.remove('$type-$uuid');
       status = 'Remove Favorite to $userEmail-fav';
     } else {
       status = 'Add Favorite to $userEmail-fav';
-      favorite.add(uuid);
+      favorite.add('$type-$uuid');
     }
     print("FAVORITE LOGIC: $status");
     dataBox.put('$userEmail-fav', favorite);
+  }
+
+  List<String> getFavoriteType(String type){
+    List<String> favoriteData;
+
+    favoriteData = favorite.where((element) => element.contains(type)).toList();
+    return favoriteData;
   }
 
   void checkNull(){
