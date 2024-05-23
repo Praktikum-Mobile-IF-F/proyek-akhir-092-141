@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
 
 class bottomInfo extends StatefulWidget {
@@ -29,12 +27,12 @@ class _bottomInfoState extends State<bottomInfo> {
             ),
           ),
           const SizedBox(height: 16.0),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 80,
             child: Center(
               child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, mainAxisSpacing: 15),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1, mainAxisSpacing: 15),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.agentData.abilities!.length,
@@ -74,7 +72,7 @@ class _bottomInfoState extends State<bottomInfo> {
     return Column(
       children: [
         Text(skillTitle,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18.0,
             fontWeight: FontWeight.bold
@@ -83,9 +81,9 @@ class _bottomInfoState extends State<bottomInfo> {
         ),
         Container(
           margin: const EdgeInsets.only(top: 10),
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(desc,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 14.0,
             ),

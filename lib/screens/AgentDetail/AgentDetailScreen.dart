@@ -13,7 +13,7 @@ class AgentDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorPallete.primaryColor,
       appBar: AppBar(
-        leading: BackButton(
+        leading: const BackButton(
           color: ColorPallete.secondaryColor,
         ),
         backgroundColor: const Color(0xFF1C1C1C),

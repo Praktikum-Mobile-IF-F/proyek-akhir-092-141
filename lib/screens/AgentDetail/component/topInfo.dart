@@ -21,16 +21,16 @@ class topInfo extends StatelessWidget {
             children: [
               Text(
                 agentData.displayName!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 agentData.role!.displayName!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                 ),
@@ -41,7 +41,7 @@ class topInfo extends StatelessWidget {
         Positioned(
           top: 20,
           left: 20,
-          child: Container(
+          child: SizedBox(
             height: 50,
             child: Image.network(agentData.role!.displayIcon!),
           ),
