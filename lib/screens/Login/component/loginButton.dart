@@ -11,6 +11,7 @@ class loginButton extends StatefulWidget {
 }
 
 class _loginButtonState extends State<loginButton> {
+  LoginController loginController = LoginController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +19,7 @@ class _loginButtonState extends State<loginButton> {
       width: 80,
       padding: const EdgeInsets.only(top: 30, right: 30),
       child: IconButton(
-        onPressed: () => LoginController.loginLogic(context, loginFormKey),
+        onPressed: () => loginController.loginLogic(context, loginFormKey),
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorPallete.secondaryColor,
           foregroundColor: ColorPallete.thirdColor,

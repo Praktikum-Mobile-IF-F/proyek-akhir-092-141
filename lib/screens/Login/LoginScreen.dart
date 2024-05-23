@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/LoginController.dart';
 import 'package:project_prak_tpm/screens/Login/component/formContainer.dart';
 import 'package:project_prak_tpm/screens/Login/component/loginButton.dart';
 import 'package:project_prak_tpm/screens/Login/component/logoImage.dart';
 import 'package:project_prak_tpm/screens/Login/component/registerText.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../controller/SharedPreferenceController.dart';
 
 TextEditingController emailController = TextEditingController();
 TextEditingController passController = TextEditingController();
 final loginFormKey = GlobalKey<FormState>();
+final LoginController loginController = LoginController();
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +20,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late SharedPreferences loginData;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLogin();
+  }
+
+  void checkLogin() async {
+    loginData = await SharedPreferences.getInstance();
+
+    if (loginData.getBool('login') ?? false) {
+      await SharedPreferenceController.init();
+      Navigator.pushReplacementNamed(context, '/home');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

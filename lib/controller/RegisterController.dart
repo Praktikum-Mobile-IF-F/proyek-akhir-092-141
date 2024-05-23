@@ -11,21 +11,21 @@ class RegisterController {
 
     if(registerFormState.currentState!.validate()){
       if(emailData == null){
-        dataBox.put('email', [emailController.text]);
-        dataBox.put(emailController.text, UserModel(username: userController.text, email: emailController.text, password: passController.text));
-        UserModel user = dataBox.get(emailController.text);
+        dataBox.put('email', [emailControllerR.text]);
+        dataBox.put(emailControllerR.text, UserModel(username: userControllerR.text, email: emailControllerR.text, password: passControllerR.text));
+        UserModel user = dataBox.get(emailControllerR.text);
         print(user.toString());
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(context, '/login');
         });
       }
-      else if(!emailData.contains(emailController.text)){
-        emailData.add(emailController.text);
+      else if(!emailData.contains(emailControllerR.text)){
+        emailData.add(emailControllerR.text);
         dataBox.put('email', emailData);
-        dataBox.put(emailController.text, UserModel(username: userController.text, email: emailController.text, password: passController.text));
-        UserModel user = dataBox.get(emailController.text);
+        dataBox.put(emailControllerR.text, UserModel(username: userControllerR.text, email: emailControllerR.text, password: passControllerR.text));
+        UserModel user = dataBox.get(emailControllerR.text);
         print(user.toString());
-        Timer(Duration(seconds: 2), () {
+        Timer(const Duration(seconds: 2), () {
           Navigator.pushReplacementNamed(context, '/login');
         });
       }
