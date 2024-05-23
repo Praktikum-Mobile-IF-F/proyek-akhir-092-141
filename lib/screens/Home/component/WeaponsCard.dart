@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 
 class WeaponCard extends StatefulWidget {
@@ -11,7 +12,7 @@ class WeaponCard extends StatefulWidget {
 }
 
 class _WeaponCardState extends State<WeaponCard> {
-  bool isFavorite = false;
+  FavoriteController favoriteController = FavoriteController();
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +57,13 @@ class _WeaponCardState extends State<WeaponCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isFavorite = !isFavorite;
+                    favoriteController.setFavorite(widget.weaponData.uuid!);
                   });
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
-                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    favoriteController.checkFavorite(widget.weaponData.uuid!) ? Icons.favorite : Icons.favorite_border,
                     color: Colors.red,
                   ),
                 ),

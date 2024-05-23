@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/screens/Home/tab/HomeTab.dart';
 
-
-class HomeScreeen extends StatefulWidget {
-  const HomeScreeen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreeen> {
+class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {

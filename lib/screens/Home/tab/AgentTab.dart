@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
+import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 import '../component/AgentCard.dart';
 
@@ -42,7 +43,7 @@ class _AgentTabState extends State<AgentTab> {
 
   Widget _buildLoadingSection() {
     return const Center(
-      child: CircularProgressIndicator(),
+      child: LoadingScreen(),
     );
   }
   

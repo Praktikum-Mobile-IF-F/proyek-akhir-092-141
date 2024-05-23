@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
-import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
 import 'package:project_prak_tpm/screens/AgentDetail/AgentDetailScreen.dart';
 
@@ -14,7 +13,6 @@ class AgentCard extends StatefulWidget {
 }
 
 class _AgentCardState extends State<AgentCard> {
-  bool isFavorite = false;
   FavoriteController favoriteController = FavoriteController();
 
   @override
