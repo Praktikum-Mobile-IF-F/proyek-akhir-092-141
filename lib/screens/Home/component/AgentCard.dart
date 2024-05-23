@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
+import 'package:project_prak_tpm/screens/AgentDetail/AgentDetailScreen.dart';
 
 class AgentCard extends StatefulWidget {
   final AgentData agentData;
@@ -17,6 +18,7 @@ class _AgentCardState extends State<AgentCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => AgentDetailScreen(agentData: widget.agentData)));
       },
       child: Card(
         color: Colors.black54,

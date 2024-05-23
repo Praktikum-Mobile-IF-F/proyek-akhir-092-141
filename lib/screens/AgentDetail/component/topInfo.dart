@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/model/AgentModel.dart';
 
 class topInfo extends StatelessWidget {
-  const topInfo({super.key});
+  final AgentData agentData;
+  const topInfo({super.key, required this.agentData});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Image.network(
-          'https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/fullportrait.png',
-          height: 300.0,
+          agentData.fullPortrait!,
+          height: 375.0,
         ),
-        const Positioned(
+        Positioned(
           top: 40.0,
-          right: 5,
+          right: 20,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                'Phoenix',
+                agentData.displayName!,
                 style: TextStyle(
                   color: Colors.red,
                   fontSize: 24.0,
@@ -27,13 +29,21 @@ class topInfo extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Text(
-                'DUELIST',
+                agentData.role!.displayName!,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
                 ),
               ),
             ],
+          ),
+        ),
+        Positioned(
+          top: 20,
+          left: 20,
+          child: Container(
+            height: 50,
+            child: Image.network(agentData.role!.displayIcon!),
           ),
         ),
       ],
