@@ -3,7 +3,7 @@ import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 
 class MapCard extends StatefulWidget {
-  final WeaponData mapData;
+  final MapData mapData;
 
   const MapCard({super.key, required this.mapData});
 

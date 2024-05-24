@@ -49,24 +49,27 @@ class _AgentFavoriteState extends State<AgentFavorite> {
       child: LoadingScreen(),
     );
   }
-  
-  Widget _successBuild(AgentModel agentData){
-    List<AgentData>? searchedAgent;
-    List<String> favoritedData = favoriteController.getFavoriteType('agent');
 
-    searchedAgent = agentData.data!.where((element) => favoritedData.any((fav) => fav.contains(element.uuid!))).toList();
-    if(widget.searchText.isNotEmpty){
-      searchedAgent = searchedAgent.where((element) => element.displayName!.contains(widget.searchText)).toList();
-      if(searchedAgent.isEmpty){
+  Widget _successBuild(AgentModel agentData) {
+    List<AgentData>? searchedAgent;
+    List<String> favoriteData = favoriteController.getFavoriteType('agent');
+
+    searchedAgent = agentData.data!
+        .where(
+            (element) => favoriteData.any((fav) => fav.contains(element.uuid!)))
+        .toList();
+
+    if (widget.searchText.isNotEmpty) {
+      searchedAgent = searchedAgent
+          .where((element) => element.displayName!.contains(widget.searchText))
+          .toList();
+      if (searchedAgent.isEmpty) {
         return const Text("NOT FOUND");
       }
     }
-    else{
-      if(searchedAgent.isEmpty){
-        return const Text("EMPTY");
-      }
+    if (searchedAgent.isEmpty) {
+      return const Text("EMPTY");
     }
-    print(searchedAgent.length);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),

@@ -1,15 +1,15 @@
-class WeaponModel {
+class MapModel {
   final int? status;
-  final List<WeaponData>? data;
+  final List<MapData>? data;
 
-  WeaponModel({
+  MapModel({
     this.status,
     this.data,
   });
 
-  WeaponModel.fromJson(Map<String, dynamic> json)
+  MapModel.fromJson(Map<String, dynamic> json)
       : status = json['status'] as int?,
-        data = (json['data'] as List?)?.map((dynamic e) => WeaponData.fromJson(e as Map<String,dynamic>)).toList();
+        data = (json['data'] as List?)?.map((dynamic e) => MapData.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
     'status' : status,
@@ -17,7 +17,7 @@ class WeaponModel {
   };
 }
 
-class WeaponData {
+class MapData {
   final String? uuid;
   final String? displayName;
   final dynamic narrativeDescription;
@@ -37,7 +37,7 @@ class WeaponData {
   final num? yScalarToAdd;
   final List<Callouts>? callouts;
 
-  WeaponData({
+  MapData({
     this.uuid,
     this.displayName,
     this.narrativeDescription,
@@ -58,7 +58,7 @@ class WeaponData {
     this.callouts,
   });
 
-  WeaponData.fromJson(Map<String, dynamic> json)
+  MapData.fromJson(Map<String, dynamic> json)
       : uuid = json['uuid'] as String?,
         displayName = json['displayName'] as String?,
         narrativeDescription = json['narrativeDescription'],

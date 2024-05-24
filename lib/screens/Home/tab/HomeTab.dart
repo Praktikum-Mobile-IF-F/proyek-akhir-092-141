@@ -22,16 +22,16 @@ class _HomeTabState extends State<HomeTab> {
     super.initState();
     _widgetSelection = [
       AgentTab(searchText: searchController.text,),
-      MapTab(searchText: searchController.text,),
-      WeaponTab(searchText: searchController.text),
+      MapFavorite(searchText: searchController.text,),
+      WeaponFavorite(searchText: searchController.text),
     ];
 
     searchController.addListener(() {
       setState(() {
         _widgetSelection = [
           AgentTab(searchText: searchController.text,),
-          MapTab(searchText: searchController.text,),
-          WeaponTab(searchText: searchController.text),
+          MapFavorite(searchText: searchController.text,),
+          WeaponFavorite(searchText: searchController.text),
         ];
       });
     });

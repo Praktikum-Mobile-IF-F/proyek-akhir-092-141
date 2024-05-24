@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/screens/Home/favorite/AgentFavorite.dart';
-import 'package:project_prak_tpm/screens/Home/tab/MapTab.dart';
-import 'package:project_prak_tpm/screens/Home/tab/WeaponTab.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/MapFavorite.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/WeaponFavorite.dart';
 
 TextEditingController searchController = TextEditingController();
 
@@ -23,16 +22,16 @@ class _HomeFavoriteState extends State<HomeFavorite> {
     super.initState();
     _widgetSelection = [
       AgentFavorite(searchText: searchController.text,),
-      MapTab(searchText: searchController.text,),
-      WeaponTab(searchText: searchController.text),
+      MapFavorite(searchText: searchController.text,),
+      WeaponFavorite(searchText: searchController.text),
     ];
 
     searchController.addListener(() {
       setState(() {
         _widgetSelection = [
           AgentFavorite(searchText: searchController.text,),
-          MapTab(searchText: searchController.text,),
-          WeaponTab(searchText: searchController.text),
+          MapFavorite(searchText: searchController.text,),
+          WeaponFavorite(searchText: searchController.text),
         ];
       });
     });
@@ -41,8 +40,8 @@ class _HomeFavoriteState extends State<HomeFavorite> {
   void _updateWidgetSelection() {
     _widgetSelection = [
       AgentFavorite(searchText: searchController.text),
-      MapTab(searchText: searchController.text),
-      WeaponTab(searchText: searchController.text),
+      MapFavorite(searchText: searchController.text),
+      WeaponFavorite(searchText: searchController.text),
     ];
   }
 

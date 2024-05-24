@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
-class WeaponTab extends StatefulWidget {
+class WeaponFavorite extends StatefulWidget {
   final String searchText;
-  const WeaponTab({super.key, required this.searchText});
+  const WeaponFavorite({super.key, required this.searchText});
 
   @override
-  State<WeaponTab> createState() => _WeaponTabState();
+  State<WeaponFavorite> createState() => _WeaponFavoriteState();
 }
 
-class _WeaponTabState extends State<WeaponTab> {
+class _WeaponFavoriteState extends State<WeaponFavorite> {
+  FavoriteController favoriteController = FavoriteController();
+
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -28,7 +31,7 @@ class _WeaponTabState extends State<WeaponTab> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
+          MapModel weaponData = MapModel.fromJson(snapshot.data);
 
           return _successBuild(weaponData);
         }
@@ -47,14 +50,25 @@ class _WeaponTabState extends State<WeaponTab> {
     );
   }
   
-  Widget _successBuild(WeaponModel weaponData){
-    List<WeaponData>? searchedWeapon;
+  Widget _successBuild(MapModel weaponData){
+    List<MapData>? searchedWeapon;
+    List<String> favoriteData = FavoriteController().getFavoriteType('weapon');
 
-    if(widget.searchText.isNotEmpty){
-      searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
-      if(searchedWeapon.isEmpty){
+    searchedWeapon = weaponData.data!
+        .where(
+            (element) => favoriteData.any((fav) => fav.contains(element.uuid!)))
+        .toList();
+
+    if (widget.searchText.isNotEmpty) {
+      searchedWeapon = searchedWeapon
+          .where((element) => element.displayName!.contains(widget.searchText))
+          .toList();
+      if (searchedWeapon.isEmpty) {
         return const Text("NOT FOUND");
       }
+    }
+    if (searchedWeapon.isEmpty) {
+      return const Text("EMPTY");
     }
 
     return GridView.builder(
@@ -65,9 +79,9 @@ class _WeaponTabState extends State<WeaponTab> {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemCount: widget.searchText.isNotEmpty? searchedWeapon!.length : weaponData.data!.length,
+      itemCount: searchedWeapon.length,
       itemBuilder: (context, index) {
-        return WeaponCard(weaponData: widget.searchText.isNotEmpty ? searchedWeapon![index] : weaponData.data![index],);
+        return WeaponCard(weaponData: searchedWeapon![index]);
       },
     );
   }

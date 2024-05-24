@@ -4,15 +4,15 @@ import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
-class WeaponTab extends StatefulWidget {
+class WeaponFavorite extends StatefulWidget {
   final String searchText;
-  const WeaponTab({super.key, required this.searchText});
+  const WeaponFavorite({super.key, required this.searchText});
 
   @override
-  State<WeaponTab> createState() => _WeaponTabState();
+  State<WeaponFavorite> createState() => _WeaponFavoriteState();
 }
 
-class _WeaponTabState extends State<WeaponTab> {
+class _WeaponFavoriteState extends State<WeaponFavorite> {
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -28,7 +28,7 @@ class _WeaponTabState extends State<WeaponTab> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
+          MapModel weaponData = MapModel.fromJson(snapshot.data);
 
           return _successBuild(weaponData);
         }
@@ -47,8 +47,8 @@ class _WeaponTabState extends State<WeaponTab> {
     );
   }
   
-  Widget _successBuild(WeaponModel weaponData){
-    List<WeaponData>? searchedWeapon;
+  Widget _successBuild(MapModel weaponData){
+    List<MapData>? searchedWeapon;
 
     if(widget.searchText.isNotEmpty){
       searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();

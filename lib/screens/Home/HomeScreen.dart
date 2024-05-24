@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/images/valorant_logo_2.png'), size: 30,), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Favorite'),
           BottomNavigationBarItem(
