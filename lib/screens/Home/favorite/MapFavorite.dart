@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
-import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
+import 'package:project_prak_tpm/screens/Home/component/MapCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
-class WeaponFavorite extends StatefulWidget {
+class MapFavorite extends StatefulWidget {
   final String searchText;
-  const WeaponFavorite({super.key, required this.searchText});
+  const MapFavorite({super.key, required this.searchText});
 
   @override
-  State<WeaponFavorite> createState() => _WeaponFavoriteState();
+  State<MapFavorite> createState() => _MapFavoriteState();
 }
 
-class _WeaponFavoriteState extends State<WeaponFavorite> {
+class _MapFavoriteState extends State<MapFavorite> {
+  FavoriteController favoriteController = FavoriteController();
+
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -20,7 +23,7 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
 
   Widget _buildListMap() {
     return FutureBuilder(
-      future: ApiDataSource.instance.loadWeapon(),
+      future: ApiDataSource.instance.loadMap(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasError) {
           // Jika data ada error maka akan ditampilkan hasil error
@@ -28,9 +31,9 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          MapModel weaponData = MapModel.fromJson(snapshot.data);
+          MapModel mapData = MapModel.fromJson(snapshot.data);
 
-          return _successBuild(weaponData);
+          return _successBuild(mapData);
         }
         return _buildLoadingSection();
       },
@@ -46,15 +49,26 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
       child: LoadingScreen(),
     );
   }
-  
-  Widget _successBuild(MapModel weaponData){
-    List<MapData>? searchedWeapon;
 
-    if(widget.searchText.isNotEmpty){
-      searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
-      if(searchedWeapon.isEmpty){
+  Widget _successBuild(MapModel mapData) {
+    List<MapData>? searchedMap;
+    List<String> favoriteData = FavoriteController().getFavoriteType('map');
+
+    searchedMap = mapData.data!
+        .where(
+            (element) => favoriteData.any((fav) => fav.contains(element.uuid!)))
+        .toList();
+
+    if (widget.searchText.isNotEmpty) {
+      searchedMap = searchedMap
+          .where((element) => element.displayName!.contains(widget.searchText))
+          .toList();
+      if (searchedMap.isEmpty) {
         return const Text("NOT FOUND");
       }
+    }
+    if (searchedMap.isEmpty) {
+      return const Text("EMPTY");
     }
 
     return GridView.builder(
@@ -65,9 +79,9 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemCount: widget.searchText.isNotEmpty? searchedWeapon!.length : weaponData.data!.length,
+      itemCount: searchedMap.length,
       itemBuilder: (context, index) {
-        return WeaponCard(weaponData: widget.searchText.isNotEmpty ? searchedWeapon![index] : weaponData.data![index],);
+        return MapCard(mapData: searchedMap![index]);
       },
     );
   }

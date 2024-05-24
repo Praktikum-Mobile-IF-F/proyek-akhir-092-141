@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/HomeFavorite.dart';
 import 'package:project_prak_tpm/screens/Home/tab/HomeTab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,10 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: <Widget>[
         const HomeTab(),
+        const HomeFavorite(),
       ][_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: ImageIcon(AssetImage('assets/images/valorant_logo_2.png'), size: 30,), label: 'Home'),
           BottomNavigationBarItem(
               icon: Icon(Icons.favorite), label: 'Favorite'),
           BottomNavigationBarItem(

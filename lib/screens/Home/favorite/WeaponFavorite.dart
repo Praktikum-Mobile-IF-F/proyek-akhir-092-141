@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
@@ -13,6 +14,8 @@ class WeaponFavorite extends StatefulWidget {
 }
 
 class _WeaponFavoriteState extends State<WeaponFavorite> {
+  FavoriteController favoriteController = FavoriteController();
+
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -49,12 +52,23 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
   
   Widget _successBuild(MapModel weaponData){
     List<MapData>? searchedWeapon;
+    List<String> favoriteData = FavoriteController().getFavoriteType('weapon');
 
-    if(widget.searchText.isNotEmpty){
-      searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
-      if(searchedWeapon.isEmpty){
+    searchedWeapon = weaponData.data!
+        .where(
+            (element) => favoriteData.any((fav) => fav.contains(element.uuid!)))
+        .toList();
+
+    if (widget.searchText.isNotEmpty) {
+      searchedWeapon = searchedWeapon
+          .where((element) => element.displayName!.contains(widget.searchText))
+          .toList();
+      if (searchedWeapon.isEmpty) {
         return const Text("NOT FOUND");
       }
+    }
+    if (searchedWeapon.isEmpty) {
+      return const Text("EMPTY");
     }
 
     return GridView.builder(
@@ -65,9 +79,9 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemCount: widget.searchText.isNotEmpty? searchedWeapon!.length : weaponData.data!.length,
+      itemCount: searchedWeapon.length,
       itemBuilder: (context, index) {
-        return WeaponCard(weaponData: widget.searchText.isNotEmpty ? searchedWeapon![index] : weaponData.data![index],);
+        return WeaponCard(weaponData: searchedWeapon![index]);
       },
     );
   }

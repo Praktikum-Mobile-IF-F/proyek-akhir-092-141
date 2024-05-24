@@ -60,13 +60,13 @@ class _AgentCardState extends State<AgentCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    favoriteController.setFavorite(widget.agentData.uuid!);
+                    favoriteController.setFavorite('agent', widget.agentData.uuid!);
                   });
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
-                    favoriteController.checkFavorite(widget.agentData.uuid!) ? Icons.favorite : Icons.favorite_border,
+                    favoriteController.checkFavorite('agent', widget.agentData.uuid!) ? Icons.favorite : Icons.favorite_border,
                     color: Colors.red,
                   ),
                 ),

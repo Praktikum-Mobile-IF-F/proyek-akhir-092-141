@@ -4,15 +4,15 @@ import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/MapCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
-class MapTab extends StatefulWidget {
+class MapFavorite extends StatefulWidget {
   final String searchText;
-  const MapTab({super.key, required this.searchText});
+  const MapFavorite({super.key, required this.searchText});
 
   @override
-  State<MapTab> createState() => _MapTabState();
+  State<MapFavorite> createState() => _MapFavoriteState();
 }
 
-class _MapTabState extends State<MapTab> {
+class _MapFavoriteState extends State<MapFavorite> {
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -28,7 +28,7 @@ class _MapTabState extends State<MapTab> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          WeaponModel mapData = WeaponModel.fromJson(snapshot.data);
+          MapModel mapData = MapModel.fromJson(snapshot.data);
 
           return _successBuild(mapData);
         }
@@ -47,8 +47,8 @@ class _MapTabState extends State<MapTab> {
     );
   }
   
-  Widget _successBuild(WeaponModel mapData){
-    List<WeaponData>? searchedMap;
+  Widget _successBuild(MapModel mapData){
+    List<MapData>? searchedMap;
 
     if(widget.searchText.isNotEmpty){
       searchedMap = mapData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();

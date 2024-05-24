@@ -3,7 +3,7 @@ import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 
 class WeaponCard extends StatefulWidget {
-  final WeaponData weaponData;
+  final MapData weaponData;
 
   const WeaponCard({super.key, required this.weaponData});
 
@@ -57,13 +57,13 @@ class _WeaponCardState extends State<WeaponCard> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    favoriteController.setFavorite(widget.weaponData.uuid!);
+                    favoriteController.setFavorite('weapon', widget.weaponData.uuid!);
                   });
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
-                    favoriteController.checkFavorite(widget.weaponData.uuid!) ? Icons.favorite : Icons.favorite_border,
+                    favoriteController.checkFavorite('weapon', widget.weaponData.uuid!) ? Icons.favorite : Icons.favorite_border,
                     color: Colors.red,
                   ),
                 ),

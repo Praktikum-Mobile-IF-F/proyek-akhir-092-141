@@ -1,19 +1,19 @@
-
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/screens/Home/tab/AgentTab.dart';
-import 'package:project_prak_tpm/screens/Home/tab/MapTab.dart';
-import 'package:project_prak_tpm/screens/Home/tab/WeaponTab.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/AgentFavorite.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/MapFavorite.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/WeaponFavorite.dart';
 
 TextEditingController searchController = TextEditingController();
 
-class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+class HomeFavorite extends StatefulWidget {
+  const HomeFavorite({super.key});
 
   @override
-  State<HomeTab> createState() => _HomeTabState();
+  State<HomeFavorite> createState() => _HomeFavoriteState();
 }
 
-class _HomeTabState extends State<HomeTab> {
+class _HomeFavoriteState extends State<HomeFavorite> {
+  String searchQuery = '';
   int selectedIndex = 0;
   late List<Widget> _widgetSelection;
 
@@ -21,7 +21,7 @@ class _HomeTabState extends State<HomeTab> {
   void initState(){
     super.initState();
     _widgetSelection = [
-      AgentTab(searchText: searchController.text,),
+      AgentFavorite(searchText: searchController.text,),
       MapFavorite(searchText: searchController.text,),
       WeaponFavorite(searchText: searchController.text),
     ];
@@ -29,7 +29,7 @@ class _HomeTabState extends State<HomeTab> {
     searchController.addListener(() {
       setState(() {
         _widgetSelection = [
-          AgentTab(searchText: searchController.text,),
+          AgentFavorite(searchText: searchController.text,),
           MapFavorite(searchText: searchController.text,),
           WeaponFavorite(searchText: searchController.text),
         ];
@@ -37,7 +37,13 @@ class _HomeTabState extends State<HomeTab> {
     });
   }
 
-  String searchQuery = '';
+  void _updateWidgetSelection() {
+    _widgetSelection = [
+      AgentFavorite(searchText: searchController.text),
+      MapFavorite(searchText: searchController.text),
+      WeaponFavorite(searchText: searchController.text),
+    ];
+  }
 
   void onTabSelected(int index) {
     setState(() {
@@ -109,17 +115,20 @@ class _HomeTabState extends State<HomeTab> {
           ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _menuTab(),
-          const SizedBox(height: 8),
-          Expanded(
-            child: searchQuery.isEmpty
-                ? _widgetSelection[selectedIndex]
-                : _searchResults(),
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: _pullRefresh,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _menuTab(),
+            const SizedBox(height: 8),
+            Expanded(
+              child: searchQuery.isEmpty
+                  ? _widgetSelection[selectedIndex]
+                  : _searchResults(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -183,5 +192,11 @@ class _HomeTabState extends State<HomeTab> {
         style: const TextStyle(fontSize: 20),
       ),
     );
+  }
+
+  Future<void> _pullRefresh() async {
+    setState(() {
+      _updateWidgetSelection();
+    });
   }
 }
