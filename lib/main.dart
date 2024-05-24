@@ -4,6 +4,7 @@ import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Home/HomeScreen.dart';
 import 'package:project_prak_tpm/screens/Home/tab/HomeTab.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
+import 'package:project_prak_tpm/screens/MapDetail/MapDetailScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
