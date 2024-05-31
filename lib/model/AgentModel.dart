@@ -1,5 +1,5 @@
 class AgentModel {
-  final int? status;
+  final num? status;
   final List<AgentData>? data;
 
   AgentModel({
@@ -8,7 +8,7 @@ class AgentModel {
   });
 
   AgentModel.fromJson(Map<String, dynamic> json)
-      : status = json['status'] as int?,
+      : status = json['status'] as num?,
         data = (json['data'] as List?)
             ?.map((dynamic e) => AgentData.fromJson(e as Map<String, dynamic>))
             .toList();

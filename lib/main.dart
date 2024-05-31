@@ -7,6 +7,7 @@ import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:project_prak_tpm/screens/MapDetail/MapDetailScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';
+import 'package:project_prak_tpm/screens/WeaponDetail/WeaponDetailScreen.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 
 late Box dataBox;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/model/WeaponModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
@@ -26,12 +27,10 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
       future: ApiDataSource.instance.loadWeapon(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasError) {
-          // Jika data ada error maka akan ditampilkan hasil error
           return _buildErrorSection();
         }
         if (snapshot.hasData) {
-          // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          MapModel weaponData = MapModel.fromJson(snapshot.data);
+          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
 
           return _successBuild(weaponData);
         }
@@ -50,8 +49,8 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
     );
   }
   
-  Widget _successBuild(MapModel weaponData){
-    List<MapData>? searchedWeapon;
+  Widget _successBuild(WeaponModel weaponData){
+    List<WeaponData>? searchedWeapon;
     List<String> favoriteData = FavoriteController().getFavoriteType('weapon');
 
     searchedWeapon = weaponData.data!

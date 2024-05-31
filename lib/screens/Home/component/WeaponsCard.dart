@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/model/WeaponModel.dart';
+import 'package:project_prak_tpm/screens/WeaponDetail/WeaponDetailScreen.dart';
 
 class WeaponCard extends StatefulWidget {
-  final MapData weaponData;
+  final WeaponData weaponData;
 
   const WeaponCard({super.key, required this.weaponData});
 
@@ -17,6 +19,9 @@ class _WeaponCardState extends State<WeaponCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => WeaponDetailScreen(weaponData: widget.weaponData!)));
+      },
       child: Card(
         color: Colors.black54,
         shape: RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/model/WeaponModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
@@ -28,7 +29,7 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          MapModel weaponData = MapModel.fromJson(snapshot.data);
+          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
 
           return _successBuild(weaponData);
         }
@@ -47,8 +48,8 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
     );
   }
   
-  Widget _successBuild(MapModel weaponData){
-    List<MapData>? searchedWeapon;
+  Widget _successBuild(WeaponModel weaponData){
+    List<WeaponData>? searchedWeapon;
 
     if(widget.searchText.isNotEmpty){
       searchedWeapon = weaponData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();

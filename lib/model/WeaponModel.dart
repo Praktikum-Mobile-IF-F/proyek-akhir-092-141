@@ -1,5 +1,5 @@
 class WeaponModel {
-  final int? status;
+  final num? status;
   final List<WeaponData>? data;
 
   WeaponModel({
@@ -8,7 +8,7 @@ class WeaponModel {
   });
 
   WeaponModel.fromJson(Map<String, dynamic> json)
-      : status = json['status'] as int?,
+      : status = json['status'] as num?,
         data = (json['data'] as List?)?.map((dynamic e) => WeaponData.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {
@@ -69,13 +69,13 @@ class WeaponData {
 }
 
 class WeaponStats {
-  final int? fireRate;
-  final int? magazineSize;
-  final double? runSpeedMultiplier;
-  final double? equipTimeSeconds;
-  final int? reloadTimeSeconds;
-  final double? firstBulletAccuracy;
-  final int? shotgunPelletCount;
+  final num? fireRate;
+  final num? magazineSize;
+  final num? runSpeedMultiplier;
+  final num? equipTimeSeconds;
+  final num? reloadTimeSeconds;
+  final num? firstBulletAccuracy;
+  final num? shotgunPelletCount;
   final String? wallPenetration;
   final String? feature;
   final dynamic fireMode;
@@ -104,13 +104,13 @@ class WeaponStats {
   });
 
   WeaponStats.fromJson(Map<String, dynamic> json)
-      : fireRate = json['fireRate'] as int?,
-        magazineSize = json['magazineSize'] as int?,
-        runSpeedMultiplier = json['runSpeedMultiplier'] as double?,
-        equipTimeSeconds = json['equipTimeSeconds'] as double?,
-        reloadTimeSeconds = json['reloadTimeSeconds'] as int?,
-        firstBulletAccuracy = json['firstBulletAccuracy'] as double?,
-        shotgunPelletCount = json['shotgunPelletCount'] as int?,
+      : fireRate = json['fireRate'] as num?,
+        magazineSize = json['magazineSize'] as num?,
+        runSpeedMultiplier = json['runSpeedMultiplier'] as num?,
+        equipTimeSeconds = json['equipTimeSeconds'] as num?,
+        reloadTimeSeconds = json['reloadTimeSeconds'] as num?,
+        firstBulletAccuracy = json['firstBulletAccuracy'] as num?,
+        shotgunPelletCount = json['shotgunPelletCount'] as num?,
         wallPenetration = json['wallPenetration'] as String?,
         feature = json['feature'] as String?,
         fireMode = json['fireMode'],
@@ -140,11 +140,11 @@ class WeaponStats {
 }
 
 class AdsStats {
-  final double? zoomMultiplier;
-  final double? fireRate;
-  final double? runSpeedMultiplier;
-  final int? burstCount;
-  final double? firstBulletAccuracy;
+  final num? zoomMultiplier;
+  final num? fireRate;
+  final num? runSpeedMultiplier;
+  final num? burstCount;
+  final num? firstBulletAccuracy;
 
   AdsStats({
     this.zoomMultiplier,
@@ -155,11 +155,11 @@ class AdsStats {
   });
 
   AdsStats.fromJson(Map<String, dynamic> json)
-      : zoomMultiplier = json['zoomMultiplier'] as double?,
-        fireRate = json['fireRate'] as double?,
-        runSpeedMultiplier = json['runSpeedMultiplier'] as double?,
-        burstCount = json['burstCount'] as int?,
-        firstBulletAccuracy = json['firstBulletAccuracy'] as double?;
+      : zoomMultiplier = json['zoomMultiplier'] as num?,
+        fireRate = json['fireRate'] as num?,
+        runSpeedMultiplier = json['runSpeedMultiplier'] as num?,
+        burstCount = json['burstCount'] as num?,
+        firstBulletAccuracy = json['firstBulletAccuracy'] as num?;
 
   Map<String, dynamic> toJson() => {
     'zoomMultiplier' : zoomMultiplier,
@@ -171,11 +171,11 @@ class AdsStats {
 }
 
 class DamageRanges {
-  final int? rangeStartMeters;
-  final int? rangeEndMeters;
-  final int? headDamage;
-  final int? bodyDamage;
-  final double? legDamage;
+  final num? rangeStartMeters;
+  final num? rangeEndMeters;
+  final String? headDamage;
+  final String? bodyDamage;
+  final String? legDamage;
 
   DamageRanges({
     this.rangeStartMeters,
@@ -186,11 +186,11 @@ class DamageRanges {
   });
 
   DamageRanges.fromJson(Map<String, dynamic> json)
-      : rangeStartMeters = json['rangeStartMeters'] as int?,
-        rangeEndMeters = json['rangeEndMeters'] as int?,
-        headDamage = json['headDamage'] as int?,
-        bodyDamage = json['bodyDamage'] as int?,
-        legDamage = json['legDamage'] as double?;
+      : rangeStartMeters = json['rangeStartMeters'] as num?,
+        rangeEndMeters = json['rangeEndMeters'] as num?,
+        headDamage = (json['headDamage'] as num?)!.toString(),
+        bodyDamage = (json['bodyDamage']  as num?)!.toString(),
+        legDamage = (json['legDamage'] as num?)!.toString();
 
   Map<String, dynamic> toJson() => {
     'rangeStartMeters' : rangeStartMeters,
@@ -202,9 +202,9 @@ class DamageRanges {
 }
 
 class ShopData {
-  final int? cost;
+  final num? cost;
   final String? category;
-  final int? shopOrderPriority;
+  final num? shopOrderPriority;
   final String? categoryText;
   final GridPosition? gridPosition;
   final bool? canBeTrashed;
@@ -227,9 +227,9 @@ class ShopData {
   });
 
   ShopData.fromJson(Map<String, dynamic> json)
-      : cost = json['cost'] as int?,
+      : cost = json['cost'] as num?,
         category = json['category'] as String?,
-        shopOrderPriority = json['shopOrderPriority'] as int?,
+        shopOrderPriority = json['shopOrderPriority'] as num?,
         categoryText = json['categoryText'] as String?,
         gridPosition = (json['gridPosition'] as Map<String,dynamic>?) != null ? GridPosition.fromJson(json['gridPosition'] as Map<String,dynamic>) : null,
         canBeTrashed = json['canBeTrashed'] as bool?,
@@ -253,8 +253,8 @@ class ShopData {
 }
 
 class GridPosition {
-  final int? row;
-  final int? column;
+  final num? row;
+  final num? column;
 
   GridPosition({
     this.row,
@@ -262,8 +262,8 @@ class GridPosition {
   });
 
   GridPosition.fromJson(Map<String, dynamic> json)
-      : row = json['row'] as int?,
-        column = json['column'] as int?;
+      : row = json['row'] as num?,
+        column = json['column'] as num?;
 
   Map<String, dynamic> toJson() => {
     'row' : row,
