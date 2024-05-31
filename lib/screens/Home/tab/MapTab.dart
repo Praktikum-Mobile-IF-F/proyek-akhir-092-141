@@ -51,7 +51,7 @@ class _MapFavoriteState extends State<MapFavorite> {
     List<MapData>? searchedMap;
 
     if(widget.searchText.isNotEmpty){
-      searchedMap = mapData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
+      searchedMap = mapData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedMap.isEmpty){
         return const Text("NOT FOUND");
       }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 
@@ -11,20 +12,50 @@ class MapDetailScreen extends StatefulWidget {
 }
 
 class _MapDetailScreenState extends State<MapDetailScreen> {
+  FavoriteController favoriteController = FavoriteController();
+  late String imageUrl;
+  bool splashImage = true;
+
+  @override
+  void initState(){
+    setState(() {
+        imageUrl = widget.mapData.splash!;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorPallete.primaryColor,
       appBar: AppBar(
-        leading: const BackButton(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+          icon: Icon(Icons.arrow_back),
           color: ColorPallete.secondaryColor,
         ),
         backgroundColor: const Color(0xFF1C1C1C),
         title: const Text('Map', style: TextStyle(color: Colors.white),),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.map, color: ColorPallete.fourthColor,)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.favorite, color: Colors.white,))
+          IconButton(onPressed: () {
+            setState(() {
+              if(splashImage){
+                splashImage = false;
+                imageUrl = 'https://imgsvc.trackercdn.com/url/max-width(1656),quality(66)/https%3A%2F%2Ftrackercdn.com%2Fcdn%2Ftracker.gg%2Fvalorant%2Fdb%2Fmaps%2F8.0%2F${widget.mapData.displayName!.toLowerCase()}.png/image.png';
+              }
+              else{
+                imageUrl = widget.mapData.splash!;
+                splashImage = true;
+              }
+            });
+          }, icon: Icon(Icons.map, color: ColorPallete.fourthColor,)),
+          IconButton(onPressed: () {
+            setState(() {
+              favoriteController.setFavorite('map', widget.mapData.uuid!);
+            });
+          }, icon: Icon(Icons.favorite, color: favoriteController.checkFavorite('map', widget.mapData.uuid!) ? Colors.red : Colors.white,))
         ],
       ),
       body: SafeArea(
@@ -38,7 +69,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                   children: [
                     // Memasukkan foto dari API
                     Image.network(
-                      'https://media.valorant-api.com/maps/7eaecc1b-4337-bbf6-6ab9-04b8f06b3319/splash.png',
+                      imageUrl,
                       height: 300.0,
                     ),
                     Positioned(
@@ -77,14 +108,14 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: callouts
-                              .sublist(0, (callouts.length / 2).ceil())
+                          children: widget.mapData.callouts!
+                              .sublist(0, (widget.mapData.callouts!.length / 2).ceil())
                               .map((callout) {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 2.0),
                               child: Text(
-                                '${callout['superRegionName']} - ${callout['regionName']}',
+                                '${callout.superRegionName!} - ${callout.regionName}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14.0,
@@ -97,14 +128,14 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: callouts
-                              .sublist((callouts.length / 2).ceil())
+                          children: widget.mapData.callouts!
+                              .sublist((widget.mapData.callouts!.length / 2).ceil())
                               .map((callout) {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 2.0),
                               child: Text(
-                                '${callout['superRegionName']} - ${callout['regionName']}',
+                                '${callout.superRegionName} - ${callout.regionName}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14.0,
@@ -148,94 +179,3 @@ class AbilityIcon extends StatelessWidget {
     );
   }
 }
-
-List<Map<String, String>> callouts = [
-  {
-    "regionName": "Tree",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Lobby",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Main",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Window",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Site",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Spawn",
-    "superRegionName": "Attacker Side",
-  },
-  {
-    "regionName": "Lobby",
-    "superRegionName": "B",
-  },
-  {
-    "regionName": "Main",
-    "superRegionName": "B",
-  },
-  {
-    "regionName": "Boat House",
-    "superRegionName": "B",
-  },
-  {
-    "regionName": "Bottom",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Site",
-    "superRegionName": "B",
-  },
-  {
-    "regionName": "Catwalk",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Cubby",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Spawn",
-    "superRegionName": "Defender Side",
-  },
-  {
-    "regionName": "Garden",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Market",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Courtyard",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Link",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Pizza",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Rafters",
-    "superRegionName": "A",
-  },
-  {
-    "regionName": "Top",
-    "superRegionName": "Mid",
-  },
-  {
-    "regionName": "Wine",
-    "superRegionName": "A",
-  }
-];

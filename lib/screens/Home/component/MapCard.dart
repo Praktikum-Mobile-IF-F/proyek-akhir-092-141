@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/screens/MapDetail/MapDetailScreen.dart';
 
 class MapCard extends StatefulWidget {
   final MapData mapData;
@@ -17,6 +18,9 @@ class _MapCardState extends State<MapCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MapDetailScreen(mapData: widget.mapData)));
+      },
       child: Card(
         color: Colors.black54,
         shape: RoundedRectangleBorder(

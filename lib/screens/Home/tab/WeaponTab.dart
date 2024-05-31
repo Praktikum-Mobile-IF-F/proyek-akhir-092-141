@@ -51,7 +51,7 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
     List<MapData>? searchedWeapon;
 
     if(widget.searchText.isNotEmpty){
-      searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
+      searchedWeapon = weaponData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedWeapon.isEmpty){
         return const Text("NOT FOUND");
       }

@@ -51,7 +51,7 @@ class _AgentTabState extends State<AgentTab> {
     List<AgentData>? searchedAgent;
 
     if(widget.searchText.isNotEmpty){
-      searchedAgent = agentData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
+      searchedAgent = agentData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedAgent.isEmpty){
         return const Text("NOT FOUND");
       }
