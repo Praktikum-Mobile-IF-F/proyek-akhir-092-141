@@ -4,13 +4,13 @@ import 'package:project_prak_tpm/main.dart';
 class FavoriteController {
   late List<String> favorite;
   String userEmail =
-      SharedPreferenceController.sharedPrefData!.getString('email')!;
+      SharedPreferenceController.sharedPrefData.getString('email')!;
   FavoriteController() {
     checkNull();
   }
 
   bool checkFavorite(String type, String uuid) {
-    if (favorite.contains('$type-$uuid') && favorite != null) {
+    if (favorite.contains('$type-$uuid')) {
       return true;
     }
     return false;

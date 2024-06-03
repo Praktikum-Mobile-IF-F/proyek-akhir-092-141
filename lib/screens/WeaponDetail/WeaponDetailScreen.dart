@@ -18,13 +18,13 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
     return Scaffold(
       backgroundColor: Colors.black, // Set background color to black
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text('Weapon Detail', style: TextStyle(color: Colors.white)),
         ), // Centered title
         backgroundColor: Colors.black, // Black AppBar
-        iconTheme: IconThemeData(color: Colors.white), // White icons
+        iconTheme: const IconThemeData(color: Colors.white), // White icons
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             setState(() {
               favoriteController.setFavorite('weapon', widget.weaponData.uuid!);
@@ -52,7 +52,7 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
             WeaponHeader(
               weaponTitle: widget.weaponData.displayName!, weaponImage: widget.weaponData.displayIcon!,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             WeaponStats(
               weaponCategory: widget.weaponData.shopData!.category!,
               weaponMag: widget.weaponData.weaponStats!.magazineSize!.toInt(),
@@ -82,11 +82,11 @@ class WeaponHeader extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             weaponTitle, //displayname
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Center(
           child: Image.network(weaponImage, height: 100), //displayicon
         ),
@@ -137,7 +137,7 @@ class StatRow extends StatelessWidget {
   final String label;
   final String value;
 
-  StatRow({required this.label, required this.value});
+  const StatRow({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -146,10 +146,10 @@ class StatRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.white)),
+          Text(label, style: const TextStyle(color: Colors.white)),
           Text(value,
               style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+                  const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
         ],
       ),
     );
@@ -160,17 +160,17 @@ class DamageColumn extends StatelessWidget {
   final String bodyPart;
   final String damage;
 
-  DamageColumn({required this.bodyPart, required this.damage});
+  const DamageColumn({super.key, required this.bodyPart, required this.damage});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Icon(Icons.person,
+        const Icon(Icons.person,
             color: Colors.white), // You can use custom icons/images here
-        Text(bodyPart, style: TextStyle(color: Colors.white)),
+        Text(bodyPart, style: const TextStyle(color: Colors.white)),
         Text(damage,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
       ],
     );
   }

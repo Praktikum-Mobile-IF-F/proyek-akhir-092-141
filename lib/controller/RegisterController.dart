@@ -1,40 +1,46 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/UserController.dart';
 import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 
 class RegisterController {
-  static void registerLogic(BuildContext context, GlobalKey<FormState> registerFormState){
+  static void registerLogic(
+      BuildContext context, GlobalKey<FormState> registerFormState) {
     List<String>? emailData = dataBox.get('email');
+    UserController userController = UserController();
 
-    if(registerFormState.currentState!.validate()){
-      if(emailData == null){
+    if (registerFormState.currentState!.validate()) {
+      if (emailData == null) {
         dataBox.put('email', [emailControllerR.text]);
-        dataBox.put(emailControllerR.text, UserModel(username: userControllerR.text, email: emailControllerR.text, password: passControllerR.text));
-        UserModel user = dataBox.get(emailControllerR.text);
-        print(user.toString());
-        Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacementNamed(context, '/login');
-        });
-      }
-      else if(!emailData.contains(emailControllerR.text)){
+
+        UserModel userData = UserModel(
+            username: userControllerR.text,
+            email: emailControllerR.text,
+            password: passControllerR.text,
+            image: '');
+        userController.setUser(emailControllerR.text, userData);
+
+        Navigator.pushReplacementNamed(context, '/login');
+      } else if (!emailData.contains(emailControllerR.text)) {
         emailData.add(emailControllerR.text);
         dataBox.put('email', emailData);
-        dataBox.put(emailControllerR.text, UserModel(username: userControllerR.text, email: emailControllerR.text, password: passControllerR.text));
-        UserModel user = dataBox.get(emailControllerR.text);
-        print(user.toString());
-        Timer(const Duration(seconds: 2), () {
-          Navigator.pushReplacementNamed(context, '/login');
-        });
-      }
-      else{
-        SnackBar snackBar = const SnackBar(content: Text("Register Failed, Change Your Email"));
+
+        UserModel userData = UserModel(
+            username: userControllerR.text,
+            email: emailControllerR.text,
+            password: passControllerR.text,
+            image: '');
+        userController.setUser(emailControllerR.text, userData);
+
+        Navigator.pushReplacementNamed(context, '/login');
+      } else {
+        SnackBar snackBar =
+            const SnackBar(content: Text("Register Failed, Change Your Email"));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
-    }
-    else{
+    } else {
       SnackBar snackBar = const SnackBar(content: Text("Register Failed"));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }

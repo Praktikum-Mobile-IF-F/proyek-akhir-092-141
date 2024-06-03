@@ -81,7 +81,7 @@ class _AgentFavoriteState extends State<AgentFavorite> {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
         ),
-        itemCount: searchedAgent!.length,
+        itemCount: searchedAgent.length,
         itemBuilder: (context, index) {
           return AgentCard(agentData: searchedAgent![index]);
         },

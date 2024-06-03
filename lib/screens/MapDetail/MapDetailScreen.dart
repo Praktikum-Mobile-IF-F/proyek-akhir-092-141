@@ -32,7 +32,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/home');
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: ColorPallete.secondaryColor,
         ),
         backgroundColor: const Color(0xFF1C1C1C),
@@ -50,7 +50,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                 splashImage = true;
               }
             });
-          }, icon: Icon(Icons.map, color: ColorPallete.fourthColor,)),
+          }, icon: const Icon(Icons.map, color: ColorPallete.fourthColor,)),
           IconButton(onPressed: () {
             setState(() {
               favoriteController.setFavorite('map', widget.mapData.uuid!);
@@ -59,98 +59,100 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Memasukkan foto dari API
-                    Image.network(
-                      imageUrl,
-                      height: 300.0,
-                    ),
-                    Positioned(
-                      top: 50.0,
-                      left: 10,
-                      child: Column(
-                        children: [
-                          Text(
-                            widget.mapData.displayName!, // diganti nama map dari API
-                            style: TextStyle(
-                              color: ColorPallete.thirdColor,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Callout Map',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: widget.mapData.callouts!
-                              .sublist(0, (widget.mapData.callouts!.length / 2).ceil())
-                              .map((callout) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
-                              child: Text(
-                                '${callout.superRegionName!} - ${callout.regionName}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.0,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
+                      // Memasukkan foto dari API
+                      Image.network(
+                        imageUrl,
+                        height: splashImage ? 300.0 : 400,
                       ),
-                      Expanded(
+                      Positioned(
+                        top: 50.0,
+                        left: 10,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: widget.mapData.callouts!
-                              .sublist((widget.mapData.callouts!.length / 2).ceil())
-                              .map((callout) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
-                              child: Text(
-                                '${callout.superRegionName} - ${callout.regionName}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.0,
-                                ),
+                          children: [
+                            Text( splashImage ?
+                              widget.mapData.displayName! : '', // diganti nama map dari API
+                              style: const TextStyle(
+                                color: ColorPallete.thirdColor,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
                               ),
-                            );
-                          }).toList(),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(height: 16.0),
+                  const Text(
+                    'Callout Map',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: widget.mapData.callouts!
+                                .sublist(0, (widget.mapData.callouts!.length / 2).ceil())
+                                .map((callout) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2.0),
+                                child: Text(
+                                  '${callout.superRegionName!} - ${callout.regionName}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: widget.mapData.callouts!
+                                .sublist((widget.mapData.callouts!.length / 2).ceil())
+                                .map((callout) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2.0),
+                                child: Text(
+                                  '${callout.superRegionName} - ${callout.regionName}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -161,12 +163,12 @@ class AbilityIcon extends StatelessWidget {
   final IconData icon;
   final Color color;
 
-  AbilityIcon({required this.icon, required this.color});
+  const AbilityIcon({super.key, required this.icon, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.grey[800],

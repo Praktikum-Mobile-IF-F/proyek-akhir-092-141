@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/model/WeaponModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';

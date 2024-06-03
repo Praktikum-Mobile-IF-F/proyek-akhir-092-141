@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
-import 'package:project_prak_tpm/model/MapModel.dart';
 import 'package:project_prak_tpm/model/WeaponModel.dart';
 import 'package:project_prak_tpm/screens/WeaponDetail/WeaponDetailScreen.dart';
 
@@ -20,7 +19,7 @@ class _WeaponCardState extends State<WeaponCard> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => WeaponDetailScreen(weaponData: widget.weaponData!)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => WeaponDetailScreen(weaponData: widget.weaponData)));
       },
       child: Card(
         color: Colors.black54,
