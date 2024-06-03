@@ -1,5 +1,5 @@
 class MapModel {
-  final int? status;
+  final num? status;
   final List<MapData>? data;
 
   MapModel({
@@ -8,7 +8,7 @@ class MapModel {
   });
 
   MapModel.fromJson(Map<String, dynamic> json)
-      : status = json['status'] as int?,
+      : status = json['status'] as num?,
         data = (json['data'] as List?)?.map((dynamic e) => MapData.fromJson(e as Map<String,dynamic>)).toList();
 
   Map<String, dynamic> toJson() => {

@@ -4,6 +4,7 @@ import 'package:project_prak_tpm/model/AgentModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 import '../component/AgentCard.dart';
+import '../component/EmptyScreen.dart';
 
 class AgentFavorite extends StatefulWidget {
   final String searchText;
@@ -64,11 +65,11 @@ class _AgentFavoriteState extends State<AgentFavorite> {
           .where((element) => element.displayName!.contains(widget.searchText))
           .toList();
       if (searchedAgent.isEmpty) {
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Favorite Agent Not Found');
       }
     }
     if (searchedAgent.isEmpty) {
-      return const Text("EMPTY");
+      return const EmptyScreen(text: 'Favorite Agent Empty');
     }
 
     return Padding(
@@ -81,7 +82,7 @@ class _AgentFavoriteState extends State<AgentFavorite> {
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
         ),
-        itemCount: searchedAgent!.length,
+        itemCount: searchedAgent.length,
         itemBuilder: (context, index) {
           return AgentCard(agentData: searchedAgent![index]);
         },

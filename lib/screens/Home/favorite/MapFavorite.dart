@@ -5,6 +5,8 @@ import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/MapCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
+import '../component/EmptyScreen.dart';
+
 class MapFavorite extends StatefulWidget {
   final String searchText;
   const MapFavorite({super.key, required this.searchText});
@@ -64,11 +66,11 @@ class _MapFavoriteState extends State<MapFavorite> {
           .where((element) => element.displayName!.contains(widget.searchText))
           .toList();
       if (searchedMap.isEmpty) {
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Favorite Map Not Found');
       }
     }
     if (searchedMap.isEmpty) {
-      return const Text("EMPTY");
+      return const EmptyScreen(text: 'Favorite Map Empty');
     }
 
     return GridView.builder(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/color/colorPalette.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});

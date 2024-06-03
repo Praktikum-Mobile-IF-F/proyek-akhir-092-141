@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Home/HomeScreen.dart';
-import 'package:project_prak_tpm/screens/Home/tab/HomeTab.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';

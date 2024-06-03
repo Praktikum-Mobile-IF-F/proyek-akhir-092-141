@@ -19,6 +19,14 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   @override
+  void dispose(){
+    emailControllerR.text = '';
+    passControllerR.text = '';
+    userControllerR.text = '';
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(

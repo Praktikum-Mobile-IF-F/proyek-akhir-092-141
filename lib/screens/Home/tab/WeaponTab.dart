@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/model/WeaponModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
+
+import '../component/EmptyScreen.dart';
 
 class WeaponFavorite extends StatefulWidget {
   final String searchText;
@@ -28,7 +30,7 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          MapModel weaponData = MapModel.fromJson(snapshot.data);
+          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
 
           return _successBuild(weaponData);
         }
@@ -47,13 +49,13 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
     );
   }
   
-  Widget _successBuild(MapModel weaponData){
-    List<MapData>? searchedWeapon;
+  Widget _successBuild(WeaponModel weaponData){
+    List<WeaponData>? searchedWeapon;
 
     if(widget.searchText.isNotEmpty){
-      searchedWeapon = weaponData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
+      searchedWeapon = weaponData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedWeapon.isEmpty){
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Weapon Not Found');
       }
     }
 

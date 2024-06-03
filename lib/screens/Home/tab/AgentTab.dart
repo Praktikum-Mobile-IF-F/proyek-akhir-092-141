@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/model/AgentModel.dart';
+import 'package:project_prak_tpm/screens/Home/component/EmptyScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 import '../component/AgentCard.dart';
@@ -51,9 +52,9 @@ class _AgentTabState extends State<AgentTab> {
     List<AgentData>? searchedAgent;
 
     if(widget.searchText.isNotEmpty){
-      searchedAgent = agentData.data!.where((element) => element.displayName!.contains(widget.searchText)).toList();
+      searchedAgent = agentData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedAgent.isEmpty){
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Agent Not Found');
       }
     }
     return Padding(
