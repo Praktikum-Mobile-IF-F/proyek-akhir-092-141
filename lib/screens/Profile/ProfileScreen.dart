@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'package:jkt48_app/model/user.dart';
-// import 'package:jkt48_app/screens/login.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
@@ -55,11 +52,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         setState(() {});
                       },
                       child: CircleAvatar(
-                        backgroundImage: imagePath != null
+                        backgroundImage: imagePath.isNotEmpty
                             ? FileImage(File(imagePath))
                             : const AssetImage('assets/images/profile.jpg')
                                 as ImageProvider,
-                        radius: 30,
+                        radius: 50,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -99,9 +96,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.grey)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.mail, color: Colors.black),
-                  title: Text('Name#Tag', style: TextStyle(color: Colors.black)),
-                  subtitle: Text('${userData.playerName}#${userData.tag}',
+                  leading: Icon(Icons.games, color: Colors.black),
+                  title: Text('Player Name', style: TextStyle(color: Colors.black)),
+                  subtitle: Text('${userData.playerName}',
+                      style: TextStyle(color: Colors.grey)),
+                ),
+                ListTile(
+                  leading: Icon(Icons.tag, color: Colors.black),
+                  title: Text('Tag', style: TextStyle(color: Colors.black)),
+                  subtitle: Text('${userData.tag}',
                       style: TextStyle(color: Colors.grey)),
                 ),
                 const SizedBox(height: 30),

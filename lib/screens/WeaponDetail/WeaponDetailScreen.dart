@@ -57,7 +57,7 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
               weaponTitle: widget.weaponData.displayName!,
               weaponImage: widget.weaponData.displayIcon!,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 40),
             WeaponStats(
               weaponCategory: widget.weaponData.shopData!.category!,
               weaponMag: widget.weaponData.weaponStats!.magazineSize!.toInt(),
@@ -67,8 +67,43 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
                   widget.weaponData.weaponStats!.reloadTimeSeconds!.toInt(),
               price: widget.weaponData.shopData!.cost!.toInt(),
             ),
+            const SizedBox(height: 40),
+            Text("Weapon Skin:", style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold
+            ),),
+            _smallImageBuilder(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _smallImageBuilder() {
+    return Container(
+      height: 100,
+      margin: const EdgeInsets.only(top: 20),
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.weaponData.skins!.length,
+          itemBuilder: (context, index) => _skinSmallImage(index)),
+    );
+  }
+
+  Widget _skinSmallImage(int index){
+    return Container(
+      height: 100,
+      margin: const EdgeInsets.only(left: 20),
+      child: Column(
+        children: [
+          Container(
+            height: 70,
+              child: Image.network(widget.weaponData.skins?[index].displayIcon ?? (widget.weaponData.skins?[index].chromas?[0].displayIcon) ?? widget.weaponData.displayIcon)),
+          Text(widget.weaponData.skins![index].displayName!, style: TextStyle(
+            color: Colors.white
+          ),)
+        ],
       ),
     );
   }
