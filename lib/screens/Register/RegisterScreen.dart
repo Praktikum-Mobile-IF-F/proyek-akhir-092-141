@@ -8,6 +8,8 @@ import 'package:project_prak_tpm/screens/Register/component/topBanner.dart';
 TextEditingController userControllerR = TextEditingController();
 TextEditingController emailControllerR = TextEditingController();
 TextEditingController passControllerR = TextEditingController();
+TextEditingController playerNameControllerR = TextEditingController();
+TextEditingController tagControllerR = TextEditingController();
 final registerFormKey = GlobalKey<FormState>();
 
 class RegisterScreen extends StatefulWidget {
@@ -23,6 +25,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     emailControllerR.text = '';
     passControllerR.text = '';
     userControllerR.text = '';
+    playerNameControllerR.text = '';
+    tagControllerR.text = '';
     super.dispose();
   }
 

@@ -4,12 +4,6 @@ import 'package:project_prak_tpm/model/UserModel.dart';
 class UserController {
   late UserModel userData;
 
-  bool checkUser(String userEmail) {
-    userData = dataBox.get(userEmail);
-    return true;
-      return false;
-  }
-
   void setUser(String userEmail, UserModel userData) {
     String status;
 

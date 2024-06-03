@@ -43,6 +43,7 @@ dependencies:
 
   path: any
   path_provider: any
+  flutter_local_notifications: ^17.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

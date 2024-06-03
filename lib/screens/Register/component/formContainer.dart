@@ -21,6 +21,14 @@ class _formContainerState extends State<formContainer> {
                 hint: "Username",
                 icon: const Icon(Icons.person)),
             formField(
+                controller: playerNameControllerR,
+                hint: "In Game Username",
+                icon: const Icon(Icons.games)),
+            formField(
+                controller: tagControllerR,
+                hint: "Tag",
+                icon: const Icon(Icons.tag)),
+            formField(
               controller: emailControllerR,
               hint: "Email",
               icon: const Icon(Icons.mail),

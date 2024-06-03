@@ -6,10 +6,15 @@ import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
 import 'package:project_prak_tpm/screens/SplashScreen.dart';
 import 'package:project_prak_tpm/utils/color/colorPalette.dart';
+import 'package:project_prak_tpm/utils/notification/NotificationService.dart';
 
 late Box dataBox;
 
 void main() async{
+  // Notification Init
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
+
   // Hive init
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());

@@ -3,9 +3,27 @@ import 'package:http/http.dart' as http;
 
 class BaseNetwork {
   static const String baseUrl = "https://valorant-api.com";
+  static const String trackerUrl = "https://api.tracker.gg/api/v2/valorant/standard/profile/riot";
+  static const String matchTrackerUrl = 'https://api.tracker.gg/api/v2/valorant/standard/matches/riot';
 
   static Future<Map<String, dynamic>> get(String partUrl) async {
     final String fullUrl = "$baseUrl/$partUrl";
+    debugPrint("BaseNetwork - fullUrl : $fullUrl");
+    final response = await http.get(Uri.parse(fullUrl));
+    debugPrint("BaseNetwork - response : ${response.body}");
+    return _processResponse(response);
+  }
+
+  static Future<Map<String, dynamic>> getTrackerData(String partUrl) async {
+    final String fullUrl = "$trackerUrl/$partUrl";
+    debugPrint("BaseNetwork - fullUrl : $fullUrl");
+    final response = await http.get(Uri.parse(fullUrl));
+    debugPrint("BaseNetwork - response : ${response.body}");
+    return _processResponse(response);
+  }
+
+  static Future<Map<String, dynamic>> getMatchTrackerData(String partUrl) async {
+    final String fullUrl = "$matchTrackerUrl/$partUrl";
     debugPrint("BaseNetwork - fullUrl : $fullUrl");
     final response = await http.get(Uri.parse(fullUrl));
     debugPrint("BaseNetwork - response : ${response.body}");
@@ -25,43 +43,7 @@ class BaseNetwork {
     }
   }
 
-  static Future<Map<String, dynamic>> post(
-      String partUrl, Map<String, dynamic> data) async {
-    final String fullUrl = "$baseUrl/$partUrl";
-    debugPrint("BaseNetwork - fullUrl : $fullUrl");
-    final response = await http.post(Uri.parse(fullUrl),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(data));
-    debugPrint("BaseNetwork - response : ${response.body}");
-    return _processResponse(response);
-  }
-
   static void debugPrint(String value) {
     print("[BASE_NETWORK] - $value");
   }
-
-  // For Array / List
-  // static Future<List<dynamic>> getList(String partUrl) async {
-  //   final String fullUrl = baseUrl + "/" + partUrl;
-  //   debugPrint("BaseNetwork - fullUrl : $fullUrl");
-  //   final response = await http.get(Uri.parse(fullUrl));
-  //   debugPrint("BaseNetwork - response : ${response.body}");
-  //   return _processResponseList(response);
-  // }
-
-  // static Future<List<dynamic>> _processResponseList(
-  //     http.Response response) async {
-  //   final body = response.body;
-  //
-  //   if (body.isNotEmpty) {
-  //     final jsonBody = json.decode(body);
-  //     return jsonBody;
-  //   } else {
-  //     print("processResponse error");
-  //     return ['error'];
-  //   }
-  // }
-//End of for Array
 }

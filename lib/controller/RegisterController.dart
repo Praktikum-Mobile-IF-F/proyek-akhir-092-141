@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
 import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Register/RegisterScreen.dart';
+import 'package:project_prak_tpm/utils/notification/NotificationService.dart';
 
 class RegisterController {
   static void registerLogic(
@@ -19,7 +19,9 @@ class RegisterController {
             username: userControllerR.text,
             email: emailControllerR.text,
             password: passControllerR.text,
-            image: '');
+            image: '',
+            playerName: playerNameControllerR.text,
+            tag: tagControllerR.text);
         userController.setUser(emailControllerR.text, userData);
 
         Navigator.pushReplacementNamed(context, '/login');
@@ -31,9 +33,12 @@ class RegisterController {
             username: userControllerR.text,
             email: emailControllerR.text,
             password: passControllerR.text,
-            image: '');
+            image: '',
+            playerName: playerNameControllerR.text,
+            tag: tagControllerR.text);
         userController.setUser(emailControllerR.text, userData);
 
+        // NotificationService().showNotification(title: 'Valorant App', body: 'Registration Success');
         Navigator.pushReplacementNamed(context, '/login');
       } else {
         SnackBar snackBar =
