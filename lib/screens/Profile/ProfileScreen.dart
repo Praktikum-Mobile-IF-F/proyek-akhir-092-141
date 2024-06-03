@@ -92,10 +92,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   subtitle: Text(userData.username,
                       style: const TextStyle(color: Colors.grey)),
                 ),
-                const ListTile(
+                ListTile(
                   leading: Icon(Icons.mail, color: Colors.black),
-                  title: Text('password', style: TextStyle(color: Colors.black)),
-                  subtitle: Text('RAHASIA LAH, ENAK AJA DIBUKA',
+                  title: Text('Email', style: TextStyle(color: Colors.black)),
+                  subtitle: Text(userData.email,
+                      style: TextStyle(color: Colors.grey)),
+                ),
+                ListTile(
+                  leading: Icon(Icons.mail, color: Colors.black),
+                  title: Text('Name#Tag', style: TextStyle(color: Colors.black)),
+                  subtitle: Text('${userData.playerName}#${userData.tag}',
                       style: TextStyle(color: Colors.grey)),
                 ),
                 const SizedBox(height: 30),

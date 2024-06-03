@@ -9,6 +9,8 @@ class UserModel{
     required this.email,
     required this.password,
     required this.image,
+    required this.playerName,
+    required this.tag,
   });
 
   @HiveField(0)
@@ -25,4 +27,10 @@ class UserModel{
 
   @HiveField(4)
   String image;
+
+  @HiveField(5)
+  final String playerName;
+
+  @HiveField(6)
+  final String tag;
 }

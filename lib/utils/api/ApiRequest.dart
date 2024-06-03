@@ -22,4 +22,12 @@ class ApiDataSource {
   Future<Map<String, dynamic>> loadDetailCharacter(String characterName) {
     return BaseNetwork.get("characters/$characterName");
   }
+
+  Future<Map<String, dynamic>> loadTrackerData(String username, String tag) {
+    return BaseNetwork.getTrackerData('$username%23$tag');
+  }
+
+  Future<Map<String, dynamic>> loadMatchTrackerData(String username, String tag) {
+    return BaseNetwork.getMatchTrackerData('$username%23$tag');
+  }
 }

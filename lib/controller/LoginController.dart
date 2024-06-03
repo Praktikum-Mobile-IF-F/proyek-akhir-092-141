@@ -5,8 +5,6 @@ import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../screens/Register/RegisterScreen.dart';
-
 class LoginController {
   late SharedPreferences loginData;
 
@@ -24,7 +22,7 @@ class LoginController {
         UserModel userData = dataBox.get(emailController.text);
         if (userData.password == passController.text) {
           loginData.setBool('login', true);
-          loginData.setString('username', userControllerR.text);
+          loginData.setString('username', userData.username);
           loginData.setString('email', emailController.text);
           setSharedPreference();
           Navigator.pushReplacementNamed(context, '/home');
