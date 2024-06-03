@@ -5,6 +5,8 @@ import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
+import '../component/EmptyScreen.dart';
+
 class WeaponFavorite extends StatefulWidget {
   final String searchText;
   const WeaponFavorite({super.key, required this.searchText});
@@ -62,11 +64,11 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
           .where((element) => element.displayName!.contains(widget.searchText))
           .toList();
       if (searchedWeapon.isEmpty) {
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Favorite Weapon Not Found');
       }
     }
     if (searchedWeapon.isEmpty) {
-      return const Text("EMPTY");
+      return const EmptyScreen(text: 'Favorite Weapon Empty');
     }
 
     return GridView.builder(

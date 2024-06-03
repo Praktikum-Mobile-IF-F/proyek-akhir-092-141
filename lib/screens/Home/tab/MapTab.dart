@@ -4,6 +4,8 @@ import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Home/component/MapCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
+import '../component/EmptyScreen.dart';
+
 class MapFavorite extends StatefulWidget {
   final String searchText;
   const MapFavorite({super.key, required this.searchText});
@@ -53,7 +55,7 @@ class _MapFavoriteState extends State<MapFavorite> {
     if(widget.searchText.isNotEmpty){
       searchedMap = mapData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if(searchedMap.isEmpty){
-        return const Text("NOT FOUND");
+        return const EmptyScreen(text: 'Map Not Found');
       }
     }
 

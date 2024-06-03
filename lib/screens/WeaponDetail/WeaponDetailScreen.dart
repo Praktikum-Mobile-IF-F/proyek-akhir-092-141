@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
 import 'package:project_prak_tpm/model/WeaponModel.dart';
+import 'package:project_prak_tpm/utils/color/colorPalette.dart';
 
 class WeaponDetailScreen extends StatefulWidget {
   final WeaponData weaponData;
@@ -24,11 +25,12 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
         backgroundColor: Colors.black, // Black AppBar
         iconTheme: const IconThemeData(color: Colors.white), // White icons
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: ColorPallete.secondaryColor,
+          ),
           onPressed: () {
-            setState(() {
-              favoriteController.setFavorite('weapon', widget.weaponData.uuid!);
-            });
+            Navigator.pop(context);
             // Handle back button press
           },
         ),
@@ -36,10 +38,12 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
           IconButton(
             icon: Icon(Icons.favorite,
                 color: favoriteController.checkFavorite(
-                        'weap', widget.weaponData.uuid!)
+                        'weapon', widget.weaponData.uuid!)
                     ? Colors.red
                     : Colors.white),
             onPressed: () {
+              favoriteController.setFavorite('weapon', widget.weaponData.uuid!);
+              setState(() {});
               // Handle favorite button press
             },
           ),
@@ -50,14 +54,17 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
         child: Column(
           children: [
             WeaponHeader(
-              weaponTitle: widget.weaponData.displayName!, weaponImage: widget.weaponData.displayIcon!,
+              weaponTitle: widget.weaponData.displayName!,
+              weaponImage: widget.weaponData.displayIcon!,
             ),
             const SizedBox(height: 16),
             WeaponStats(
               weaponCategory: widget.weaponData.shopData!.category!,
               weaponMag: widget.weaponData.weaponStats!.magazineSize!.toInt(),
-              equipTime: widget.weaponData.weaponStats!.equipTimeSeconds!.toDouble(),
-              reloadTime: widget.weaponData.weaponStats!.reloadTimeSeconds!.toInt(),
+              equipTime:
+                  widget.weaponData.weaponStats!.equipTimeSeconds!.toDouble(),
+              reloadTime:
+                  widget.weaponData.weaponStats!.reloadTimeSeconds!.toInt(),
               price: widget.weaponData.shopData!.cost!.toInt(),
             ),
           ],
@@ -71,7 +78,8 @@ class WeaponHeader extends StatelessWidget {
   final String weaponTitle;
   final String weaponImage;
 
-  const WeaponHeader({super.key, required this.weaponTitle, required this.weaponImage});
+  const WeaponHeader(
+      {super.key, required this.weaponTitle, required this.weaponImage});
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +156,8 @@ class StatRow extends StatelessWidget {
         children: [
           Text(label, style: const TextStyle(color: Colors.white)),
           Text(value,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white)),
         ],
       ),
     );
@@ -170,7 +178,8 @@ class DamageColumn extends StatelessWidget {
             color: Colors.white), // You can use custom icons/images here
         Text(bodyPart, style: const TextStyle(color: Colors.white)),
         Text(damage,
-            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white)),
       ],
     );
   }
