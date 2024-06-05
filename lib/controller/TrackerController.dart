@@ -20,4 +20,26 @@ class TrackerController {
 
     return timeDiff;
   }
+
+  String getPerfImage(int score){
+    String imageLocation = 'assets/images/valorant_logo_2.png';
+
+    if(score < 300){
+      imageLocation = 'assets/images/d.png';
+    }
+    else if(score >= 300 && score < 475){
+      imageLocation = 'assets/images/c.png';
+    }
+    else if(score >= 475 && score < 650){
+      imageLocation = 'assets/images/b.png';
+    }
+    else if(score >= 650 && score < 825){
+      imageLocation = 'assets/images/a.png';
+    }
+    else if(score >= 825){
+      imageLocation = 'assets/images/s.png';
+    }
+
+    return imageLocation;
+  }
 }

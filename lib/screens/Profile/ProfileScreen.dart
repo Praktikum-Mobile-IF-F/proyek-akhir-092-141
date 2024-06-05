@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'package:jkt48_app/model/user.dart';
-// import 'package:jkt48_app/screens/login.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
+import 'package:project_prak_tpm/screens/Profile/PlayerProfileScreen.dart';
 import 'package:project_prak_tpm/utils/image_picker/ImagePickerHelper.dart';
 import 'dart:io';
 
@@ -38,6 +36,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Player Profile'),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SafeArea(
@@ -55,11 +57,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         setState(() {});
                       },
                       child: CircleAvatar(
-                        backgroundImage: imagePath != null
+                        backgroundImage: imagePath.isNotEmpty
                             ? FileImage(File(imagePath))
                             : const AssetImage('assets/images/profile.jpg')
                                 as ImageProvider,
-                        radius: 30,
+                        radius: 50,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -99,27 +101,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(color: Colors.grey)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.mail, color: Colors.black),
-                  title: Text('Name#Tag', style: TextStyle(color: Colors.black)),
-                  subtitle: Text('${userData.playerName}#${userData.tag}',
+                  leading: Icon(Icons.games, color: Colors.black),
+                  title: Text('Player Name', style: TextStyle(color: Colors.black)),
+                  subtitle: Text('${userData.playerName}',
+                      style: TextStyle(color: Colors.grey)),
+                ),
+                ListTile(
+                  leading: Icon(Icons.tag, color: Colors.black),
+                  title: Text('Tag', style: TextStyle(color: Colors.black)),
+                  subtitle: Text('${userData.tag}',
                       style: TextStyle(color: Colors.grey)),
                 ),
                 const SizedBox(height: 30),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      SharedPreferenceController.sharedPrefData.remove('login');
-                      Navigator.pushReplacementNamed(context, '/login');
-                    },
-                    icon: const Icon(Icons.exit_to_app, color: Colors.white),
-                    label: const Text('Log Out', style: TextStyle(color: Colors.white)),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => PlayerProfileScreen()));
+                      },
+                      icon: const Icon(Icons.person, color: Colors.white),
+                      label: const Text('Player Profile', style: TextStyle(color: Colors.white)),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      ),
                     ),
-                  ),
+                    TextButton.icon(
+                      onPressed: () {
+                        SharedPreferenceController.sharedPrefData.remove('login');
+                        Navigator.pushReplacementNamed(context, '/login');
+                      },
+                      icon: const Icon(Icons.exit_to_app, color: Colors.white),
+                      label: const Text('Log Out', style: TextStyle(color: Colors.white)),
+                      style: TextButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
