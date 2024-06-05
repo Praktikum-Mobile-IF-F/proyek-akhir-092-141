@@ -6,6 +6,7 @@ import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/model/ValorantMatchModel.dart';
 import 'package:project_prak_tpm/model/ValorantTrackerModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
+import 'package:project_prak_tpm/screens/Tracker/component/TrackerEmptyScreen.dart';
 import 'package:project_prak_tpm/screens/Tracker/component/TrackerWidgetContainer.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
@@ -19,10 +20,10 @@ class TrackerScreen extends StatefulWidget {
 class _TrackerScreenState extends State<TrackerScreen> {
   @override
   Widget build(BuildContext context) {
-    return _buildListAgent();
+    return _buildTracker();
   }
 
-  Widget _buildListAgent() {
+  Widget _buildTracker() {
     UserModel userData = UserController().getUserData(SharedPreferenceController.sharedPrefData.getString('email')!);
     String playerName = userData.playerName;
     String userTag = userData.tag;
@@ -36,6 +37,10 @@ class _TrackerScreenState extends State<TrackerScreen> {
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
           ValorantMatchModel trackerData = ValorantMatchModel.fromJson(snapshot.data);
+          if(trackerData.data == null){
+            return TrackerEmptyScreen(text: 'Data or User Not Found',);
+          }
+          print(trackerData);
           return _successBuild(trackerData);
         }
         return _buildLoadingSection();

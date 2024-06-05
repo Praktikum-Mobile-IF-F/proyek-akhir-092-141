@@ -58,6 +58,7 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
               weaponImage: widget.weaponData.displayIcon!,
             ),
             const SizedBox(height: 40),
+            widget.weaponData.weaponStats != null ?
             WeaponStats(
               weaponCategory: widget.weaponData.shopData!.category!,
               weaponMag: widget.weaponData.weaponStats!.magazineSize!.toInt(),
@@ -66,13 +67,15 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
               reloadTime:
                   widget.weaponData.weaponStats!.reloadTimeSeconds!.toInt(),
               price: widget.weaponData.shopData!.cost!.toInt(),
-            ),
+            ) : const SizedBox(height: 20,),
             const SizedBox(height: 40),
-            Text("Weapon Skin:", style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold
-            ),),
+            Text(
+              "Weapon Skin:",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
             _smallImageBuilder(),
           ],
         ),
@@ -81,28 +84,43 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
   }
 
   Widget _smallImageBuilder() {
+    List<Skins> skinData = widget.weaponData.skins!;
+
+    skinData.removeWhere((element) => element.displayName!.contains('Standard') || element.displayName!.contains('Random Favorite'));
     return Container(
       height: 100,
       margin: const EdgeInsets.only(top: 20),
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: widget.weaponData.skins!.length,
-          itemBuilder: (context, index) => _skinSmallImage(index)),
+          itemBuilder: (context, index) => _skinSmallImage(skinData[index])),
     );
   }
 
-  Widget _skinSmallImage(int index){
+  Widget _skinSmallImage(Skins skinData) {
     return Container(
       height: 100,
       margin: const EdgeInsets.only(left: 20),
       child: Column(
         children: [
           Container(
-            height: 70,
-              child: Image.network(widget.weaponData.skins?[index].displayIcon ?? (widget.weaponData.skins?[index].chromas?[0].displayIcon) ?? widget.weaponData.displayIcon)),
-          Text(widget.weaponData.skins![index].displayName!, style: TextStyle(
-            color: Colors.white
-          ),)
+              height: 70,
+              child: Image.network(skinData.displayIcon ??
+                  (skinData.chromas?[0].displayIcon) ??
+                  skinData.chromas?[0].fullRender)),
+          Text(
+            skinData.displayName!,
+            style: TextStyle(color: Colors.white),
+          )
+          // Container(
+          //     height: 70,
+          //     child: Image.network(widget.weaponData.skins?[0].displayIcon ??
+          //         (widget.weaponData.skins?[0].chromas?[0].displayIcon) ??
+          //         widget.weaponData.displayIcon)),
+          // Text(
+          //   widget.weaponData.skins![0].displayName!,
+          //   style: TextStyle(color: Colors.white),
+          // )
         ],
       ),
     );
