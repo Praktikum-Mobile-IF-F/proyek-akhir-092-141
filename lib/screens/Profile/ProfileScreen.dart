@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Player Profile'),
+        title: const Text('Player Profile'),
         centerTitle: true,
       ),
       body: Padding(
@@ -95,22 +95,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: const TextStyle(color: Colors.grey)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.mail, color: Colors.black),
-                  title: Text('Email', style: TextStyle(color: Colors.black)),
+                  leading: const Icon(Icons.mail, color: Colors.black),
+                  title: const Text('Email', style: TextStyle(color: Colors.black)),
                   subtitle: Text(userData.email,
-                      style: TextStyle(color: Colors.grey)),
+                      style: const TextStyle(color: Colors.grey)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.games, color: Colors.black),
-                  title: Text('Player Name', style: TextStyle(color: Colors.black)),
-                  subtitle: Text('${userData.playerName}',
-                      style: TextStyle(color: Colors.grey)),
+                  leading: const Icon(Icons.games, color: Colors.black),
+                  title: const Text('Player Name', style: TextStyle(color: Colors.black)),
+                  subtitle: Text(userData.playerName,
+                      style: const TextStyle(color: Colors.grey)),
                 ),
                 ListTile(
-                  leading: Icon(Icons.tag, color: Colors.black),
-                  title: Text('Tag', style: TextStyle(color: Colors.black)),
-                  subtitle: Text('${userData.tag}',
-                      style: TextStyle(color: Colors.grey)),
+                  leading: const Icon(Icons.tag, color: Colors.black),
+                  title: const Text('Tag', style: TextStyle(color: Colors.black)),
+                  subtitle: Text(userData.tag,
+                      style: const TextStyle(color: Colors.grey)),
                 ),
                 const SizedBox(height: 30),
                 Row(
@@ -118,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     TextButton.icon(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => PlayerProfileScreen()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const PlayerProfileScreen()));
                       },
                       icon: const Icon(Icons.person, color: Colors.white),
                       label: const Text('Player Profile', style: TextStyle(color: Colors.white)),

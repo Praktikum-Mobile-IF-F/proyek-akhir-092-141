@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:project_prak_tpm/controller/HistoryController.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/controller/TrackerController.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
+import 'package:project_prak_tpm/model/PurchaseHistoryModel.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/model/ValorantTrackerModel.dart';
 import 'package:project_prak_tpm/screens/Profile/component/PlayerEmptyScreen.dart';
@@ -22,6 +24,7 @@ late UserModel userData;
 class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
   UserController userController = UserController();
   TrackerController trackerController = TrackerController();
+  HistoryController historyController = HistoryController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
         leading: const BackButton(
           color: ColorPallete.secondaryColor,
         ),
-        title: Text(
+        title: const Text(
           'Player Info',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -58,9 +61,9 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
           ValorantTrackerModel trackerData =
-              ValorantTrackerModel.fromJson(snapshot.data);
+          ValorantTrackerModel.fromJson(snapshot.data);
           if(trackerData.data == null){
-            return PlayerEmptyScreen(text: 'Data or User Not Found',);
+            return const PlayerEmptyScreen(text: 'Data or User Not Found',);
           }
           ProfileTrackerData profileData = trackerData.data!;
           return _buildSuccessSection(profileData);
@@ -81,6 +84,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
   }
 
   Widget _buildSuccessSection(ProfileTrackerData profileData) {
+    final List<PurchaseHistoryModel> historyList = historyController.getHistory();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SafeArea(
@@ -94,10 +99,10 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                     onTap: () async {},
                     child: CircleAvatar(
                       backgroundImage: profileData
-                              .platformInfo!.avatarUrl!.isNotEmpty
+                          .platformInfo!.avatarUrl!.isNotEmpty
                           ? NetworkImage(profileData.platformInfo!.avatarUrl!)
                           : const AssetImage('assets/images/profile.jpg')
-                              as ImageProvider,
+                      as ImageProvider,
                       radius: 50,
                     ),
                   ),
@@ -113,7 +118,7 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        profileData.segments![0].metadata!.name!,
+                        profileData.segments[0].metadata!.name!,
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 14,
@@ -143,26 +148,26 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                   trackerController.getPerfImage(profileData
                       .segments[0].stats!.trnPerformanceScore!.value!
                       .toInt()),
-                  "Peformance Score",
+                  "Performance Score",
                   '${profileData.segments[0].stats!.trnPerformanceScore!.value.toString()} / 1000',
                   assets: true),
               const SizedBox(height: 20),
-              Text(
-                "OVERVIEW:"!,
-                style: const TextStyle(
+              const Text(
+                "OVERVIEW:",
+                style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
               ),
               Table(
-                columnWidths: {
+                columnWidths: const {
                   0: FlexColumnWidth(),
                   1: FlexColumnWidth(),
                   2: FlexColumnWidth(),
                   3: IntrinsicColumnWidth(),
                 },
                 children: [
-                  TableRow(
+                  const TableRow(
                     children: [
                       Text(
                         'Win %',
@@ -175,7 +180,7 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(
-                        'Headshot%',
+                        'Headshot %',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white),
                       ),
@@ -189,26 +194,26 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                   TableRow(
                     children: [
                       Text(
-                        '${profileData.segments[0].stats!.matchesWinPct!.displayValue!}',
-                        style: TextStyle(
+                        profileData.segments[0].stats!.matchesWinPct!.displayValue!,
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                       Text(
                         profileData.segments[0].stats!.kDRatio!.displayValue!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                       Text(
                         profileData.segments[0].stats!.headshotsPercentage!.displayValue!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                       Text(
                         profileData.segments[0].stats!.damagePerRound!.displayValue!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -216,6 +221,100 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 30),
+              const Text(
+                "PURCHASE HISTORY:",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold),
+              ),
+              Table(
+                border: TableBorder.all(color: Colors.white),
+                columnWidths: const {
+                  0: IntrinsicColumnWidth(),
+                  1: FlexColumnWidth(),
+                  2: IntrinsicColumnWidth(),
+                  3: FlexColumnWidth(),
+                },
+                children: [
+                  const TableRow(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'No.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Bundle Name',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Price',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Purchased At',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  ...List<TableRow>.generate(historyList.length, (index) {
+                    final PurchaseHistoryModel purchase = historyList[index];
+                    return TableRow(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            (index + 1).toString(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            purchase.bundleName,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            purchase.price,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            purchase.purchasedAt,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+                ],
+              )
             ],
           ),
         ),
@@ -231,27 +330,27 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
         children: [
           assets
               ? Image.asset(
-                  iconUrl,
-                  height: 50.0,
-                )
+            iconUrl,
+            height: 50.0,
+          )
               : Image.network(
-                  iconUrl,
-                  height: 50.0,
-                ),
-          SizedBox(width: 15),
+            iconUrl,
+            height: 50.0,
+          ),
+          const SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
               ),
               Text(
                 value,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ],
           ),

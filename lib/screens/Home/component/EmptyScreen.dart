@@ -11,13 +11,13 @@ class EmptyScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: 100,
             child: Image.asset('assets/images/valorant_logo_2.png'),
           ),
           Text(
             text,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           )
         ],
       ),

@@ -30,4 +30,8 @@ class ApiDataSource {
   Future<Map<String, dynamic>> loadMatchTrackerData(String username, String tag) {
     return BaseNetwork.getMatchTrackerData('$username%23$tag');
   }
+
+  Future<Map<String, dynamic>> loadBundleData() {
+    return BaseNetwork.getBundleData('bundles');
+  }
 }

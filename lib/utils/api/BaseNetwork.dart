@@ -5,6 +5,7 @@ class BaseNetwork {
   static const String baseUrl = "https://valorant-api.com";
   static const String trackerUrl = "https://api.tracker.gg/api/v2/valorant/standard/profile/riot";
   static const String matchTrackerUrl = 'https://api.tracker.gg/api/v2/valorant/standard/matches/riot';
+  static const String bundleUrl = "http://10.0.2.2:3000/api";
 
   static Future<Map<String, dynamic>> get(String partUrl) async {
     final String fullUrl = "$baseUrl/$partUrl";
@@ -24,6 +25,14 @@ class BaseNetwork {
 
   static Future<Map<String, dynamic>> getMatchTrackerData(String partUrl) async {
     final String fullUrl = "$matchTrackerUrl/$partUrl";
+    debugPrint("BaseNetwork - fullUrl : $fullUrl");
+    final response = await http.get(Uri.parse(fullUrl));
+    debugPrint("BaseNetwork - response : ${response.body}");
+    return _processResponse(response);
+  }
+
+  static Future<Map<String, dynamic>> getBundleData(String partUrl) async {
+    final String fullUrl = "$bundleUrl/$partUrl";
     debugPrint("BaseNetwork - fullUrl : $fullUrl");
     final response = await http.get(Uri.parse(fullUrl));
     debugPrint("BaseNetwork - response : ${response.body}");

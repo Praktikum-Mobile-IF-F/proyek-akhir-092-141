@@ -6,15 +6,15 @@ import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
 import '../component/EmptyScreen.dart';
 
-class WeaponFavorite extends StatefulWidget {
+class WeaponTab extends StatefulWidget {
   final String searchText;
-  const WeaponFavorite({super.key, required this.searchText});
+  const WeaponTab({super.key, required this.searchText});
 
   @override
-  State<WeaponFavorite> createState() => _WeaponFavoriteState();
+  State<WeaponTab> createState() => _WeaponTabState();
 }
 
-class _WeaponFavoriteState extends State<WeaponFavorite> {
+class _WeaponTabState extends State<WeaponTab> {
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
