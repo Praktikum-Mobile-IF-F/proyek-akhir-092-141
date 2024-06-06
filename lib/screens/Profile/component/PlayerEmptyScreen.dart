@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlayerEmptyScreen extends StatelessWidget {
@@ -11,13 +10,13 @@ class PlayerEmptyScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: 100,
             child: Image.asset('assets/images/valorant_logo_2.png'),
           ),
           Text(
             text,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
           )
         ],
       ),

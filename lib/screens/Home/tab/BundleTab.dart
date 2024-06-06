@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:project_prak_tpm/model/MapModel.dart';
+import 'package:project_prak_tpm/model/BundleModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
-import 'package:project_prak_tpm/screens/Home/component/MapCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
+import '../component/BundleCard.dart';
 import '../component/EmptyScreen.dart';
 
-class MapTab extends StatefulWidget {
+class BundleTab extends StatefulWidget {
   final String searchText;
-  const MapTab({super.key, required this.searchText});
+  const BundleTab({super.key, required this.searchText});
 
   @override
-  State<MapTab> createState() => _MapTabState();
+  State<BundleTab> createState() => _BundleTabState();
 }
 
-class _MapTabState extends State<MapTab> {
+class _BundleTabState extends State<BundleTab> {
   @override
   Widget build(BuildContext context) {
     return _buildListMap();
@@ -22,7 +22,7 @@ class _MapTabState extends State<MapTab> {
 
   Widget _buildListMap() {
     return FutureBuilder(
-      future: ApiDataSource.instance.loadMap(),
+      future: ApiDataSource.instance.loadBundleData(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasError) {
           // Jika data ada error maka akan ditampilkan hasil error
@@ -30,9 +30,9 @@ class _MapTabState extends State<MapTab> {
         }
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
-          MapModel mapData = MapModel.fromJson(snapshot.data);
+          BundleModel bundleData = BundleModel.fromJson(snapshot.data);
 
-          return _successBuild(mapData);
+          return _successBuild(bundleData);
         }
         return _buildLoadingSection();
       },
@@ -49,13 +49,13 @@ class _MapTabState extends State<MapTab> {
     );
   }
   
-  Widget _successBuild(MapModel mapData){
-    List<MapData>? searchedMap;
+  Widget _successBuild(BundleModel bundleData){
+    List<BundleData>? searchedBundle;
 
     if(widget.searchText.isNotEmpty){
-      searchedMap = mapData.data!.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
-      if(searchedMap.isEmpty){
-        return const EmptyScreen(text: 'Map Not Found');
+      searchedBundle = bundleData.data.where((element) => element.name!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
+      if(searchedBundle.isEmpty){
+        return const EmptyScreen(text: 'Weapon Not Found');
       }
     }
 
@@ -67,9 +67,9 @@ class _MapTabState extends State<MapTab> {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemCount: widget.searchText.isNotEmpty? searchedMap!.length : mapData.data!.length,
+      itemCount: widget.searchText.isNotEmpty? searchedBundle!.length : bundleData.data.length,
       itemBuilder: (context, index) {
-        return MapCard(mapData: widget.searchText.isNotEmpty ? searchedMap![index] : mapData.data![index]);
+        return BundleCard(bundleData: widget.searchText.isNotEmpty ? searchedBundle![index] : bundleData.data[index],);
       },
     );
   }

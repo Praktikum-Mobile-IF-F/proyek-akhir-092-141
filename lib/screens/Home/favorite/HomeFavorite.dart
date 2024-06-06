@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/screens/Home/favorite/AgentFavorite.dart';
+import 'package:project_prak_tpm/screens/Home/favorite/BundleFavorite.dart';
 import 'package:project_prak_tpm/screens/Home/favorite/MapFavorite.dart';
 import 'package:project_prak_tpm/screens/Home/favorite/WeaponFavorite.dart';
 
@@ -24,6 +25,7 @@ class _HomeFavoriteState extends State<HomeFavorite> {
       AgentFavorite(searchText: searchController.text,),
       MapFavorite(searchText: searchController.text,),
       WeaponFavorite(searchText: searchController.text),
+      BundleFavorite(searchText: searchController.text)
     ];
 
     searchController.addListener(() {
@@ -32,6 +34,7 @@ class _HomeFavoriteState extends State<HomeFavorite> {
           AgentFavorite(searchText: searchController.text,),
           MapFavorite(searchText: searchController.text,),
           WeaponFavorite(searchText: searchController.text),
+          BundleFavorite(searchText: searchController.text)
         ];
       });
     });
@@ -42,6 +45,7 @@ class _HomeFavoriteState extends State<HomeFavorite> {
       AgentFavorite(searchText: searchController.text),
       MapFavorite(searchText: searchController.text),
       WeaponFavorite(searchText: searchController.text),
+      BundleFavorite(searchText: searchController.text)
     ];
   }
 
@@ -153,6 +157,11 @@ class _HomeFavoriteState extends State<HomeFavorite> {
             selectedIndex == 2,
                 () => onTabSelected(2),
           ),
+          _tabItem(
+            'Bundle',
+            selectedIndex == 3,
+                () => onTabSelected(3),
+          ),
         ],
       ),
     );
@@ -168,7 +177,7 @@ class _HomeFavoriteState extends State<HomeFavorite> {
             Text(
               title,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: isSelected ? Colors.red : Colors.black,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),

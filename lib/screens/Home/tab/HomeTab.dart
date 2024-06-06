@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/screens/Home/tab/AgentTab.dart';
+import 'package:project_prak_tpm/screens/Home/tab/BundleTab.dart';
 import 'package:project_prak_tpm/screens/Home/tab/MapTab.dart';
 import 'package:project_prak_tpm/screens/Home/tab/WeaponTab.dart';
 
@@ -22,16 +23,18 @@ class _HomeTabState extends State<HomeTab> {
     super.initState();
     _widgetSelection = [
       AgentTab(searchText: searchController.text,),
-      MapFavorite(searchText: searchController.text,),
-      WeaponFavorite(searchText: searchController.text),
+      MapTab(searchText: searchController.text,),
+      WeaponTab(searchText: searchController.text),
+      BundleTab(searchText: searchController.text)
     ];
 
     searchController.addListener(() {
       setState(() {
         _widgetSelection = [
           AgentTab(searchText: searchController.text,),
-          MapFavorite(searchText: searchController.text,),
-          WeaponFavorite(searchText: searchController.text),
+          MapTab(searchText: searchController.text,),
+          WeaponTab(searchText: searchController.text),
+          BundleTab(searchText: searchController.text)
         ];
       });
     });
@@ -140,9 +143,14 @@ class _HomeTabState extends State<HomeTab> {
                 () => onTabSelected(1),
           ),
           _tabItem(
-            'Weapon',
+            'Weapons',
             selectedIndex == 2,
                 () => onTabSelected(2),
+          ),
+          _tabItem(
+            'Bundles',
+            selectedIndex == 3,
+                () => onTabSelected(3),
           ),
         ],
       ),
@@ -159,7 +167,7 @@ class _HomeTabState extends State<HomeTab> {
             Text(
               title,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 16,
                 color: isSelected ? Colors.red : Colors.black,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),

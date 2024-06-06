@@ -61,9 +61,7 @@ class _AgentFavoriteState extends State<AgentFavorite> {
         .toList();
 
     if (widget.searchText.isNotEmpty) {
-      searchedAgent = searchedAgent
-          .where((element) => element.displayName!.contains(widget.searchText))
-          .toList();
+      searchedAgent = searchedAgent.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if (searchedAgent.isEmpty) {
         return const EmptyScreen(text: 'Favorite Agent Not Found');
       }

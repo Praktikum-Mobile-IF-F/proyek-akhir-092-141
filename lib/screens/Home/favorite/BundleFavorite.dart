@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/FavoriteController.dart';
-import 'package:project_prak_tpm/model/WeaponModel.dart';
+import 'package:project_prak_tpm/model/BundleModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
-import 'package:project_prak_tpm/screens/Home/component/WeaponsCard.dart';
 import 'package:project_prak_tpm/utils/api/ApiRequest.dart';
 
+import '../component/BundleCard.dart';
 import '../component/EmptyScreen.dart';
 
-class WeaponFavorite extends StatefulWidget {
+class BundleFavorite extends StatefulWidget {
   final String searchText;
-  const WeaponFavorite({super.key, required this.searchText});
+  const BundleFavorite({super.key, required this.searchText});
 
   @override
-  State<WeaponFavorite> createState() => _WeaponFavoriteState();
+  State<BundleFavorite> createState() => _BundleFavoriteState();
 }
 
-class _WeaponFavoriteState extends State<WeaponFavorite> {
+class _BundleFavoriteState extends State<BundleFavorite> {
   FavoriteController favoriteController = FavoriteController();
 
   @override
@@ -25,15 +25,15 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
 
   Widget _buildListMap() {
     return FutureBuilder(
-      future: ApiDataSource.instance.loadWeapon(),
+      future: ApiDataSource.instance.loadBundleData(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasError) {
           return _buildErrorSection();
         }
         if (snapshot.hasData) {
-          WeaponModel weaponData = WeaponModel.fromJson(snapshot.data);
+          BundleModel bundleData = BundleModel.fromJson(snapshot.data);
 
-          return _successBuild(weaponData);
+          return _successBuild(bundleData);
         }
         return _buildLoadingSection();
       },
@@ -50,23 +50,22 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
     );
   }
   
-  Widget _successBuild(WeaponModel weaponData){
-    List<WeaponData>? searchedWeapon;
-    List<String> favoriteData = FavoriteController().getFavoriteType('weapon');
+  Widget _successBuild(BundleModel bundleData){
+    List<BundleData>? searchedBundle;
+    List<String> favoriteData = FavoriteController().getFavoriteType('bundle');
 
-    searchedWeapon = weaponData.data!
-        .where(
-            (element) => favoriteData.any((fav) => fav.contains(element.uuid!)))
-        .toList();
+    searchedBundle = bundleData.data.where((element) => element.name!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
 
     if (widget.searchText.isNotEmpty) {
-      searchedWeapon = searchedWeapon.where((element) => element.displayName!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
-      if (searchedWeapon.isEmpty) {
-        return const EmptyScreen(text: 'Favorite Weapon Not Found');
+      searchedBundle = searchedBundle
+          .where((element) => element.name!.contains(widget.searchText))
+          .toList();
+      if (searchedBundle.isEmpty) {
+        return const EmptyScreen(text: 'Favorite Bundle Not Found');
       }
     }
-    if (searchedWeapon.isEmpty) {
-      return const EmptyScreen(text: 'Favorite Weapon Empty');
+    if (searchedBundle.isEmpty) {
+      return const EmptyScreen(text: 'Favorite Bundle Empty');
     }
 
     return GridView.builder(
@@ -77,9 +76,9 @@ class _WeaponFavoriteState extends State<WeaponFavorite> {
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
-      itemCount: searchedWeapon.length,
+      itemCount: searchedBundle.length,
       itemBuilder: (context, index) {
-        return WeaponCard(weaponData: searchedWeapon![index]);
+        return BundleCard(bundleData: searchedBundle![index]);
       },
     );
   }

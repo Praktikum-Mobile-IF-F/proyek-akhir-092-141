@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:project_prak_tpm/model/PurchaseHistoryModel.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/screens/Home/HomeScreen.dart';
 import 'package:project_prak_tpm/screens/Login/LoginScreen.dart';
@@ -18,6 +19,7 @@ void main() async{
   // Hive init
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
+  Hive.registerAdapter(PurchaseHistoryModelAdapter());
   dataBox = await Hive.openBox('dataBox');
   runApp(const MyApp());
 }

@@ -49,7 +49,7 @@ class ProfileTrackerData {
     "platformInfo": platformInfo?.toJson(),
     "userInfo": userInfo?.toJson(),
     "metadata": metadata?.toJson(),
-    "segments": segments.map((x) => x?.toJson()).toList(),
+    "segments": segments.map((x) => x.toJson()).toList(),
     "availableSegments": availableSegments.map((x) => x).toList(),
     "expiryDate": expiryDate?.toIso8601String(),
   };

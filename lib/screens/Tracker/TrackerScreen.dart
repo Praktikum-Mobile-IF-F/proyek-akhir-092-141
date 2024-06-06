@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
-import 'package:project_prak_tpm/model/AgentModel.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/model/ValorantMatchModel.dart';
-import 'package:project_prak_tpm/model/ValorantTrackerModel.dart';
 import 'package:project_prak_tpm/screens/Home/component/LoadingScreen.dart';
 import 'package:project_prak_tpm/screens/Tracker/component/TrackerEmptyScreen.dart';
 import 'package:project_prak_tpm/screens/Tracker/component/TrackerWidgetContainer.dart';
@@ -38,7 +36,7 @@ class _TrackerScreenState extends State<TrackerScreen> {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
           ValorantMatchModel trackerData = ValorantMatchModel.fromJson(snapshot.data);
           if(trackerData.data == null){
-            return TrackerEmptyScreen(text: 'Data or User Not Found',);
+            return const TrackerEmptyScreen(text: 'Data or User Not Found',);
           }
           print(trackerData);
           return _successBuild(trackerData);

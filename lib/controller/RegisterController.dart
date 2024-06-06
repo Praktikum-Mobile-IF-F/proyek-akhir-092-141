@@ -25,6 +25,7 @@ class RegisterController {
         userController.setUser(emailControllerR.text, userData);
 
         Navigator.pushReplacementNamed(context, '/login');
+        NotificationService().showNotification(title: 'Valorant App', body: 'Registration Success');
       } else if (!emailData.contains(emailControllerR.text)) {
         emailData.add(emailControllerR.text);
         dataBox.put('email', emailData);
@@ -38,7 +39,7 @@ class RegisterController {
             tag: tagControllerR.text);
         userController.setUser(emailControllerR.text, userData);
 
-        // NotificationService().showNotification(title: 'Valorant App', body: 'Registration Success');
+        NotificationService().showNotification(title: 'Valorant App', body: 'Registration Success');
         Navigator.pushReplacementNamed(context, '/login');
       } else {
         SnackBar snackBar =
@@ -49,6 +50,5 @@ class RegisterController {
       SnackBar snackBar = const SnackBar(content: Text("Register Failed"));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-    // print("DEBUG: [REGISTER CONTROLLER (HIVE]: ${dataBox.get('email')}");
   }
 }

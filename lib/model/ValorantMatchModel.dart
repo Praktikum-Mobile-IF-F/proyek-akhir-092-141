@@ -43,7 +43,7 @@ class MatchData {
   }
 
   Map<String, dynamic> toJson() => {
-    "matches": matches.map((x) => x?.toJson()).toList(),
+    "matches": matches.map((x) => x.toJson()).toList(),
     "metadata": metadata?.toJson(),
     "paginationType": paginationType,
     "requestingPlayerAttributes": requestingPlayerAttributes?.toJson(),
@@ -80,7 +80,7 @@ class Match {
   Map<String, dynamic> toJson() => {
     "attributes": attributes?.toJson(),
     "metadata": metadata?.toJson(),
-    "segments": segments.map((x) => x?.toJson()).toList(),
+    "segments": segments.map((x) => x.toJson()).toList(),
     "streams": streams,
     "expiryDate": expiryDate?.toIso8601String(),
   };

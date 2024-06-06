@@ -69,7 +69,7 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
               price: widget.weaponData.shopData!.cost!.toInt(),
             ) : const SizedBox(height: 20,),
             const SizedBox(height: 40),
-            Text(
+            const Text(
               "Weapon Skin:",
               style: TextStyle(
                   color: Colors.white,
@@ -103,14 +103,14 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
       margin: const EdgeInsets.only(left: 20),
       child: Column(
         children: [
-          Container(
+          SizedBox(
               height: 70,
               child: Image.network(skinData.displayIcon ??
                   (skinData.chromas?[0].displayIcon) ??
                   skinData.chromas?[0].fullRender)),
           Text(
             skinData.displayName!,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           )
           // Container(
           //     height: 70,
