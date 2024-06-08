@@ -164,6 +164,7 @@ class _HomeTabState extends State<HomeTab> {
         padding: const EdgeInsets.only(right: 16.0),
         child: Column(
           children: [
+
             Text(
               title,
               style: TextStyle(

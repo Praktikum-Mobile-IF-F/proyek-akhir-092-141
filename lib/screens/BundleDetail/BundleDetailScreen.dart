@@ -19,7 +19,7 @@ class _BundleDetailScreenState extends State<BundleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: const Color(0xFF1C1C1C), // Set background color to black
       appBar: AppBar(
         title: const Center(
           child: Text('Bundle Detail', style: TextStyle(color: Colors.white)),
@@ -133,7 +133,7 @@ class _BundleDetailScreenState extends State<BundleDetailScreen> {
             TextButton(
               child: const Text('Confirm'),
               onPressed: () {
-                historyController.setHistory(widget.bundleData);
+                historyController.setHistory(widget.bundleData, context);
                 Navigator.of(context).pop();
               },
             ),

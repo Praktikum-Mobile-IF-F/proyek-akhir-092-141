@@ -50,16 +50,17 @@ class _BundleFavoriteState extends State<BundleFavorite> {
     );
   }
   
-  Widget _successBuild(BundleModel bundleData){
+  Widget _successBuild(BundleModel bundleData) {
     List<BundleData>? searchedBundle;
     List<String> favoriteData = FavoriteController().getFavoriteType('bundle');
 
-    searchedBundle = bundleData.data.where((element) => element.name!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
+    searchedBundle = bundleData.data!
+        .where(
+            (element) => favoriteData.any((fav) => fav.contains(element.id.toString()!)))
+        .toList();
 
     if (widget.searchText.isNotEmpty) {
-      searchedBundle = searchedBundle
-          .where((element) => element.name!.contains(widget.searchText))
-          .toList();
+      searchedBundle = searchedBundle.where((element) => element.name!.toLowerCase().contains(widget.searchText.toLowerCase())).toList();
       if (searchedBundle.isEmpty) {
         return const EmptyScreen(text: 'Favorite Bundle Not Found');
       }

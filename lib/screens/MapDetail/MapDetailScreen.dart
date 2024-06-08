@@ -30,7 +30,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
           color: ColorPallete.secondaryColor,

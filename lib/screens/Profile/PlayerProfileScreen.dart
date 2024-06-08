@@ -3,6 +3,7 @@ import 'package:project_prak_tpm/controller/HistoryController.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/controller/TrackerController.dart';
 import 'package:project_prak_tpm/controller/UserController.dart';
+import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/PurchaseHistoryModel.dart';
 import 'package:project_prak_tpm/model/UserModel.dart';
 import 'package:project_prak_tpm/model/ValorantTrackerModel.dart';
@@ -61,9 +62,11 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
         if (snapshot.hasData) {
           // Jika data ada dan berhasil maka akan ditampilkan hasil datanya
           ValorantTrackerModel trackerData =
-          ValorantTrackerModel.fromJson(snapshot.data);
-          if(trackerData.data == null){
-            return const PlayerEmptyScreen(text: 'Data or User Not Found',);
+              ValorantTrackerModel.fromJson(snapshot.data);
+          if (trackerData.data == null) {
+            return const PlayerEmptyScreen(
+              text: 'Data or User Not Found',
+            );
           }
           ProfileTrackerData profileData = trackerData.data!;
           return _buildSuccessSection(profileData);
@@ -84,7 +87,7 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
   }
 
   Widget _buildSuccessSection(ProfileTrackerData profileData) {
-    final List<PurchaseHistoryModel> historyList = historyController.getHistory();
+    final List<PurchaseHistoryModel> historyList = historyController.getHistoryData();
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -99,10 +102,10 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                     onTap: () async {},
                     child: CircleAvatar(
                       backgroundImage: profileData
-                          .platformInfo!.avatarUrl!.isNotEmpty
+                              .platformInfo!.avatarUrl!.isNotEmpty
                           ? NetworkImage(profileData.platformInfo!.avatarUrl!)
                           : const AssetImage('assets/images/profile.jpg')
-                      as ImageProvider,
+                              as ImageProvider,
                       radius: 50,
                     ),
                   ),
@@ -194,7 +197,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                   TableRow(
                     children: [
                       Text(
-                        profileData.segments[0].stats!.matchesWinPct!.displayValue!,
+                        profileData
+                            .segments[0].stats!.matchesWinPct!.displayValue!,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
@@ -206,13 +210,15 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        profileData.segments[0].stats!.headshotsPercentage!.displayValue!,
+                        profileData.segments[0].stats!.headshotsPercentage!
+                            .displayValue!,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        profileData.segments[0].stats!.damagePerRound!.displayValue!,
+                        profileData
+                            .segments[0].stats!.damagePerRound!.displayValue!,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                         textAlign: TextAlign.center,
@@ -245,7 +251,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         child: Text(
                           'No.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -253,7 +260,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         child: Text(
                           'Bundle Name',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -261,7 +269,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         child: Text(
                           'Price',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(
@@ -269,7 +278,8 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                         child: Text(
                           'Purchased At',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -314,7 +324,7 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
                     );
                   }),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -330,13 +340,13 @@ class _PlayerProfileScreenState extends State<PlayerProfileScreen> {
         children: [
           assets
               ? Image.asset(
-            iconUrl,
-            height: 50.0,
-          )
+                  iconUrl,
+                  height: 50.0,
+                )
               : Image.network(
-            iconUrl,
-            height: 50.0,
-          ),
+                  iconUrl,
+                  height: 50.0,
+                ),
           const SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
