@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:project_prak_tpm/controller/SharedPreferenceController.dart';
 import 'package:project_prak_tpm/main.dart';
 import 'package:project_prak_tpm/model/BundleModel.dart';
@@ -13,7 +15,7 @@ class HistoryController {
     checkNull();
   }
 
-  void setHistory(BundleData bundleData) {
+  void setHistory(BundleData bundleData, BuildContext context) {
     DateTime timeNow = DateTime.now().toUtc();
 
     try {
@@ -22,23 +24,27 @@ class HistoryController {
       print("HISTORY LOGIC: success");
       NotificationService().showNotification(title: 'ValorantApp', body: "Purchased Success");
       dataBox.put('$userEmail-history', purchaseHistory);
+      SnackBar snackBar =
+      const SnackBar(content: Text("Purchase Success"));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     catch(err) {
       print(err);
       NotificationService().showNotification(title: 'ValorantApp', body: "Purchased Failed");
     }
-
   }
 
-  List<PurchaseHistoryModel> getHistory(){
+  List<PurchaseHistoryModel> getHistoryData(){
     return purchaseHistory;
   }
 
   void checkNull(){
-    if (dataBox.get('$userEmail-history') == null) {
+    var storedHistory = dataBox.get('$userEmail-history');
+
+    if (storedHistory == null) {
       purchaseHistory = [];
     } else {
-      purchaseHistory = dataBox.get('$userEmail-history');
+      purchaseHistory = List<PurchaseHistoryModel>.from(storedHistory);
     }
   }
 }

@@ -17,7 +17,7 @@ class _WeaponDetailScreenState extends State<WeaponDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: const Color(0xFF1C1C1C), // Set background color to black
       appBar: AppBar(
         title: const Center(
           child: Text('Weapon Detail', style: TextStyle(color: Colors.white)),
